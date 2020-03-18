@@ -12,7 +12,9 @@ MUon (MUD) Data file reader package.
 
 ### Install 
 
-* Install using pip: `pip3 install bdata`
+* Install using pip: `pip3 install mud-py`
+
+Note that the import statement after install is `import mudpy`
 
 ## Contents
 

@@ -5,5 +5,5 @@ from mudpy.mdata import mdata
 import os
 
 __all__ = ['mdata','containers']
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 __author__ = 'Derek Fujimoto'

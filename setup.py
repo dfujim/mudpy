@@ -20,7 +20,7 @@ ext = Extension("mudpy.mud_friendly",
                 include_dirs=['./mud_src/'])
 
 setuptools.setup(
-    name="mudpy",
+    name="mud-py",
     version="0.1.0",
     author="Derek Fujimoto",
     author_email="fujimoto@phas.ubc.ca",

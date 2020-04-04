@@ -1028,6 +1028,13 @@ cdef extern from "../mud_src/mud_friendly.c":
     int MUD_getIndVarDescription( int fh, int num, char* description, int strdim)
     int MUD_getIndVarUnits( int fh, int num, char* units, int strdim )
     
+    int MUD_getIndVarNumData( int fh, int num, unsigned int* pNumData )
+    int MUD_getIndVarElemSize( int fh, int num, unsigned int* pElemSize )
+    int MUD_getIndVarDataType( int fh, int num, unsigned int* pDataType )
+    int MUD_getIndVarHasTime( int fh, int num, unsigned int* pHasTime )
+    int MUD_getIndVarData( int fh, int num, void* pData )
+    int MUD_getIndVarTimeData( int fh, int num, void* pTimeData )
+    
 cpdef get_ivars(int file_handle):
     """Returns numpy array of int32: [data type, number of independent variables]."""
     cdef unsigned int pType
@@ -1092,6 +1099,52 @@ cpdef get_ivar_units(int file_handle, int id_number):
         raise RuntimeError('MUD_getIndVarUnits failed.')
     return <object>(title.decode('latin1'))
 
+cpdef get_ivar_n_data(int file_handle, int id_number):
+    """Returns number of history data points """ 
+    cdef unsigned int n_data
+    if not MUD_getIndVarNumData(file_handle, id_number, &n_data):
+        raise RuntimeError('MUD_getIndVarNumData failed.')
+    return <int>n_data
+    
+cpdef get_ivar_element_size(int file_handle, int id_number):
+    """Returns size of elements in array in bytes per element""" 
+    cdef unsigned int value
+    if not MUD_getIndVarElemSize(file_handle, id_number, &value):
+        raise RuntimeError('MUD_getIndVarElemSize failed.')
+    return <int>value
+    
+cpdef get_ivar_data_type(int file_handle, int id_number):
+    """Returns data type of elements in array""" 
+    cdef unsigned int value
+    if not MUD_getIndVarDataType(file_handle, id_number, &value):
+        raise RuntimeError('MUD_getIndVarDataType failed.')
+    return <int>value
+    
+cpdef get_ivar_has_time(int file_handle, int id_number):
+    """Indicates whether or not there is time data""" 
+    cdef unsigned int value
+    if not MUD_getIndVarHasTime(file_handle, id_number, &value):
+        raise RuntimeError('MUD_getIndVarHasTime failed.')
+    return <int>value
+  
+cpdef get_ivar_data(int file_handle, int id_number):
+    """Returns array of saved data""" 
+    ndata = get_ivar_n_data(file_handle, id_number)
+    cdef array.array a = array.array('i', [0]*ndata)
+    if not MUD_getIndVarData(file_handle, id_number, &a.data.as_ints[0]):
+        raise RuntimeError('MUD_getIndVarData failed.')
+    cdef int[:] ca = a
+    return np.array(ca, dtype=int)
+
+cpdef get_ivar_time_data(int file_handle, int id_number):
+    """Returns array of saved time data""" 
+    ndata = get_ivar_n_data(file_handle, id_number)
+    cdef array.array a = array.array('i', [0]*ndata)
+    if not MUD_getIndVarTimeData(file_handle, id_number, &a.data.as_ints[0]):
+        raise RuntimeError('MUD_getIndVarTimeData failed.')
+    cdef int[:] ca = a
+    return np.array(ca, dtype=int)
+    
 ### ======================================================================= ###
 # WRITE INDEPENDENT VARIABLES
 ### ======================================================================= ###
@@ -1105,6 +1158,13 @@ cdef extern from "../mud_src/mud_friendly.c":
     int MUD_setIndVarName( int fh, int id_number, char* name )
     int MUD_setIndVarDescription( int fh, int id_number, char* description)
     int MUD_setIndVarUnits( int fh, int id_number, char* units )
+    
+    int MUD_setIndVarNumData( int fh, int num, unsigned int value )
+    int MUD_setIndVarElemSize( int fh, int num, unsigned int value )
+    int MUD_setIndVarDataType( int fh, int num, unsigned int pType )
+#~     int MUD_setIndVarHasTime( int fh, int num, unsigned int value )
+    int MUD_setIndVarData( int fh, int num, void* pData )
+    int MUD_getIndVarTimeData( int fh, int num, void* pTimeData )
     
 cpdef set_ivars(int file_handle, unsigned int pType, unsigned int n_vars):
     """
@@ -1159,3 +1219,47 @@ cpdef set_ivar_units(int file_handle, int id_number, str title):
     if not MUD_setIndVarUnits(file_handle, id_number, title.encode('latin1')):
         raise RuntimeError('MUD_setIndVarUnits failed.')
     return
+    
+cpdef set_ivar_n_data(int file_handle, int id_number, unsigned int value):
+    """Set number of history data points """ 
+    if not MUD_setIndVarNumData(file_handle, id_number, value):
+        raise RuntimeError('MUD_setIndVarNumData failed.')
+    return
+    
+cpdef set_ivar_element_size(int file_handle, int id_number, unsigned int value):
+    """Set size of elements in array in bytes per element""" 
+    if not MUD_setIndVarElemSize(file_handle, id_number, value):
+        raise RuntimeError('MUD_setIndVarElemSize failed.')
+    return
+    
+cpdef set_ivar_data_type(int file_handle, int id_number, unsigned int value):
+    """Set data type of elements in array""" 
+    if not MUD_setIndVarDataType(file_handle, id_number, value):
+        raise RuntimeError('MUD_setIndVarDataType failed.')
+    return <int>value
+    
+#~ cpdef set_ivar_has_time(int file_handle, int id_number, object value):
+#~     """Set whether or not there is time data""" 
+#~     value = int(value)
+#~     if not MUD_setIndVarHasTime(file_handle, id_number, value):
+#~         raise RuntimeError('MUD_setIndVarHasTime failed.')
+#~     return
+  
+cpdef set_ivar_data(int file_handle, int id_number, int[:] data_array):
+    """Set array of saved data""" 
+    
+    # set dtype and contiguous
+    cdef np.uint32_t[::1] buff = np.ascontiguousarray(data_array, dtype=np.uint32)
+    
+    if not MUD_setIndVarData(file_handle, id_number, &buff[0]):
+        raise RuntimeError('MUD_setIndVarData failed.')
+    return 
+
+cpdef set_ivar_time_data(int file_handle, int id_number, int[:] data_array):
+    """Set array of saved time data""" 
+    # set dtype and contiguous
+    cdef np.uint32_t[::1] buff = np.ascontiguousarray(data_array, dtype=np.uint32)
+    
+    if not MUD_getIndVarTimeData(file_handle, id_number, &buff[0]):
+        raise RuntimeError('MUD_getIndVarTimeData failed.')
+    return 

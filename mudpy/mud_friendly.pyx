@@ -219,10 +219,10 @@ cpdef open_write(str file_name, unsigned int file_type):
         Open file for writing a new MUD file. 
         file_name:      string, file name 
         file_type:      int, corresponds to one of the format identifiers
-                            FMT_ALL_ID = MUD_FMT_ALL_ID
-                            FMT_GEN_ID = MUD_FMT_GEN_ID
-                            FMT_TRI_TD_ID = MUD_FMT_TRI_TD_ID (TD-MuSR)
-                            FMT_TRI_TI_ID = MUD_FMT_TRI_TI_ID (I-MuSR)                           
+                            FMT_ALL_ID
+                            FMT_GEN_ID
+                            FMT_TRI_TD_ID (TD-MuSR)
+                            FMT_TRI_TI_ID (I-MuSR)                           
         Returns file handle.
     """
     cdef int fh = MUD_openWrite(file_name.encode('latin1'),file_type)
@@ -525,13 +525,19 @@ cpdef set_experimenter(int file_handle, str title):
     return
  
 cpdef set_temperature(int file_handle, str title):
-    """title: string"""
+    """
+        Not in I-MuSR
+        title: string
+    """
     if not MUD_setTemperature(file_handle, title.encode('latin1')):
         raise RuntimeError('MUD_setTemperature failed.')
     return
  
 cpdef set_field(int file_handle, str title):
-    """title: string"""
+    """
+        Not in I-MuSR
+        title: string
+    """
     if not MUD_setField(file_handle, title.encode('latin1')):
         raise RuntimeError('MUD_setField failed.')
     return
@@ -623,19 +629,19 @@ cpdef set_comments(int file_handle, unsigned int pType, unsigned int n_comments)
     
 cpdef set_comment_prev(int file_handle, int id_number, unsigned int value):
     """Set id of previous comment."""
-    if not MUD_setCommentPrev(file_handle, id_number, value):
+    if not MUD_setCommentPrev(file_handle, id_number, np.int32(value)):
         raise RuntimeError('MUD_setCommentPrev failed.')
     return 
 
 cpdef set_comment_next(int file_handle, int id_number, unsigned int value):
     """Set id of next comment."""
-    if not MUD_setCommentNext(file_handle, id_number, value):
+    if not MUD_setCommentNext(file_handle, id_number, np.int32(value)):
         raise RuntimeError('MUD_setCommentNext failed.')
     return 
 
 cpdef set_comment_time(int file_handle, int id_number, unsigned int value):
     """Set unix epoch timestamp of comment."""
-    if not MUD_setCommentTime(file_handle, id_number, value):
+    if not MUD_setCommentTime(file_handle, id_number, np.int32(value)):
         raise RuntimeError('MUD_setCommentTime failed.')
     return
 
@@ -1010,7 +1016,7 @@ cpdef set_scaler_counts(int file_handle, int id_number, long[:] value):
     # set dtype and contiguous
     cdef np.uint32_t[::1] buff = np.ascontiguousarray(value, dtype=np.uint32)
     
-    if not MUD_getScalerCounts(file_handle, id_number, &buff[0]):
+    if not MUD_setScalerCounts(file_handle, id_number, &buff[0]):
         raise RuntimeError('MUD_setScalerCounts failed.')
     return
         
@@ -1162,9 +1168,8 @@ cdef extern from "../mud_src/mud_friendly.c":
     int MUD_setIndVarNumData( int fh, int num, unsigned int value )
     int MUD_setIndVarElemSize( int fh, int num, unsigned int value )
     int MUD_setIndVarDataType( int fh, int num, unsigned int pType )
-#~     int MUD_setIndVarHasTime( int fh, int num, unsigned int value )
     int MUD_setIndVarData( int fh, int num, void* pData )
-    int MUD_getIndVarTimeData( int fh, int num, void* pTimeData )
+    int MUD_setIndVarTimeData( int fh, int num, void* pTimeData )
     
 cpdef set_ivars(int file_handle, unsigned int pType, unsigned int n_vars):
     """
@@ -1233,33 +1238,51 @@ cpdef set_ivar_element_size(int file_handle, int id_number, unsigned int value):
     return
     
 cpdef set_ivar_data_type(int file_handle, int id_number, unsigned int value):
-    """Set data type of elements in array""" 
+    """
+        Set data type of elements in array
+        value = 
+            1 for integer (3 bytes/element), 
+            2 for real (4 bytes/element), and 
+            3 for string
+    """ 
     if not MUD_setIndVarDataType(file_handle, id_number, value):
         raise RuntimeError('MUD_setIndVarDataType failed.')
-    return <int>value
+    return
     
-#~ cpdef set_ivar_has_time(int file_handle, int id_number, object value):
-#~     """Set whether or not there is time data""" 
-#~     value = int(value)
-#~     if not MUD_setIndVarHasTime(file_handle, id_number, value):
-#~         raise RuntimeError('MUD_setIndVarHasTime failed.')
-#~     return
-  
-cpdef set_ivar_data(int file_handle, int id_number, int[:] data_array):
+cpdef set_ivar_data(int file_handle, int id_number, data_array):
     """Set array of saved data""" 
     
-    # set dtype and contiguous
-    cdef np.uint32_t[::1] buff = np.ascontiguousarray(data_array, dtype=np.uint32)
+    # get which data type was set
+    data_type = get_ivar_data_type(file_handle, id_number)
     
-    if not MUD_setIndVarData(file_handle, id_number, &buff[0]):
-        raise RuntimeError('MUD_setIndVarData failed.')
-    return 
+    cdef np.uint32_t[::1] buff_int
+    cdef np.float64_t[::1] buff_float
+    
+    # set dtype and contiguous
+    if data_type == 1:
+        buff_int = np.ascontiguousarray(data_array, dtype=np.uint32)
+        
+        if not MUD_setIndVarData(file_handle, id_number, &buff_int[0]):
+            raise RuntimeError('MUD_setIndVarData failed.')
+        return 
+        
+    elif data_type == 2:
+        buff_float = np.ascontiguousarray(data_array, dtype=np.float64)
+        
+        if not MUD_setIndVarData(file_handle, id_number, &buff_float[0]):
+            raise RuntimeError('MUD_setIndVarData failed.')
+        return 
 
-cpdef set_ivar_time_data(int file_handle, int id_number, int[:] data_array):
+    elif data_type == 3:
+            raise RuntimeError('Setting strings not defined in set_ivar_data.')
+    else:
+        raise RuntimeError('Need to set ivar data type')
+
+cpdef set_ivar_time_data(int file_handle, int id_number, long[:] data_array):
     """Set array of saved time data""" 
     # set dtype and contiguous
     cdef np.uint32_t[::1] buff = np.ascontiguousarray(data_array, dtype=np.uint32)
     
-    if not MUD_getIndVarTimeData(file_handle, id_number, &buff[0]):
+    if not MUD_setIndVarTimeData(file_handle, id_number, &buff[0]):
         raise RuntimeError('MUD_getIndVarTimeData failed.')
     return 

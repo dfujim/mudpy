@@ -115,7 +115,7 @@ class mdata(object):
                             }
     
     scaler_attribute_functions = {
-                            'counts':mud.get_scaler_counts,
+                            'counts_total_recent':mud.get_scaler_counts,
                             'title':mud.get_scaler_label,
                             }   
     
@@ -185,7 +185,7 @@ class mdata(object):
                              attr_name='comments',
                              obj_class=mcomment
                              )
-                    
+            
         # Close file ----------------------------------------------------------
         finally:
             mud.close_read(fh)

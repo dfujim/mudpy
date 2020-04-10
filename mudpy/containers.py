@@ -173,11 +173,11 @@ class mscaler(mcontainer):
         Data fields:
             id_number
             title
-            counts
+            counts_total_recent
     """
-    __slots__ = ('id_number','title','counts')
+    __slots__ = ('id_number','title','counts_total_recent')
     
-    def _get_val(self): return self.counts
+    def _get_val(self): return self.counts_total_recent[0]
         
 # ========================================================================== #
 class mlist(list):

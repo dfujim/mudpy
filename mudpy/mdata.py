@@ -211,11 +211,11 @@ class mdata(object):
         except AttributeError as err:
             
             # fetching of second level
-            if hasattr(self,'hist') and hasattr(self.hist,name):
+            if hasattr(self,'hist'):
                 return getattr(self.hist,name)
-            if hasattr(self,'ivar') and hasattr(self.ivar,name): 
+            if hasattr(self,'ivar'): 
                 return getattr(self.ivar,name)
-            if hasattr(self,'sclr') and hasattr(self.sclr,name): 
+            if hasattr(self,'sclr'): 
                 return getattr(self.sclr,name)
                     
             # nothing worked - raise error

@@ -76,31 +76,58 @@ File IO
 
 |Cython Function (python-accessible) |C Function (wrapped) |
 | -------- | -------- |
-|`open_read(file_name)` |`int MUD_openRead(char* file_name, unsigned int* pType)` |
-|`close_read(file_handle)` |`void MUD_closeRead(int file_handle)` |
+|`open_read(str file_name)` |`MUD_openRead(char* file_name, unsigned int* pType)` |
+|`open_write(str file_name, unsigned int file_type)` |`MUD_openWrite(char* file_name, unsigned int pType)` |
+|`open_readwrite(str file_name)` |`MUD_openReadWrite(char* file_name, unsigned int* pType)` |
+|`close_read(int file_handle)` |`MUD_closeRead(int file_handle)` |
+|`close_write(int file_handle)` |`MUD_closeWrite(int file_handle)` |
+|`close_writefile(int file_handle, str file_name)` |`MUD_closeWriteFile(int file_handle, char* file_name)` |
 
 Headers
 
 |Cython Function (python-accessible) |C Function (wrapped) |
 | -------- | -------- |
-|`get_description(file_handle)` |`int MUD_getRunDesc(int fh, unsigned int* pType)` |
-|`get_exp_number(file_handle)` |`int MUD_getExptNumber(int fh, unsigned int* pExpNumber)` |
-|`get_run_number(file_handle)` |`int MUD_getRunNumber(int fh, unsigned int* pRunNumber)` |
-|`get_elapsed_seconds(file_handle)` |`int MUD_getElapsedSec(int fh, unsigned int* pElapsedSec)` |
-|`get_start_time(file_handle)` |`int MUD_getTimeBegin(int fh, unsigned int* pTimeBegin)` |
-|`get_end_time(file_handle)` |`int MUD_getTimeEnd(int fh, unsigned int* pTimeEnd)` |
-|`get_title(file_handle)` |`int MUD_getTitle(int fh, char* string, int strdim)` |
-|`get_lab(file_handle)` |`int MUD_getLab(int fh, char* string, int strdim)` |
-|`get_area(file_handle)` |`int MUD_getArea(int fh, char* string, int strdim)` |
-|`get_method(file_handle)` |`int MUD_getMethod(int fh, char* string, int strdim)` |
-|`get_apparatus(file_handle)` |`int MUD_getApparatus(int fh, char* string, int strdim)` |
-|`get_insert(file_handle)` |`int MUD_getInsert(int fh, char* string, int strdim)` |
-|`get_sample(file_handle)` |`int MUD_getSample(int fh, char* string, int strdim)` |
-|`get_orientation(file_handle)` |`int MUD_getOrient(int fh, char* string, int strdim)` |
-|`get_das(file_handle)` |`int MUD_getDas(int fh, char* string, int strdim)` |
-|`get_experimenter(file_handle)` |`int MUD_getExperimenter(int fh, char* string, int strdim)` |
-|`get_temperature(file_handle)` |`int MUD_getTemperature(int fh, char* string, int strdim )` |
-|`get_field(file_handle)` |`int MUD_getField(int fh, char* string, int strdim )` |
+|`get_description(int file_handle)` |`int MUD_getRunDesc(int fh, unsigned int* pType)` |
+|`get_exp_number(int file_handle)` |`int MUD_getExptNumber(int fh, unsigned int* pExpNumber)` |
+|`get_run_number(int file_handle)` |`int MUD_getRunNumber(int fh, unsigned int* pRunNumber)` |
+|`get_elapsed_seconds(int file_handle)` |`int MUD_getElapsedSec(int fh, unsigned int* pElapsedSec)` |
+|`get_start_time(int file_handle)` |`int MUD_getTimeBegin(int fh, unsigned int* pTimeBegin)` |
+|`get_end_time(int file_handle)` |`int MUD_getTimeEnd(int fh, unsigned int* pTimeEnd)` |
+|`get_title(int file_handle)` |`int MUD_getTitle(int fh, char* string, int strdim)` |
+|`get_lab(int file_handle)` |`int MUD_getLab(int fh, char* string, int strdim)` |
+|`get_area(int file_handle)` |`int MUD_getArea(int fh, char* string, int strdim)` |
+|`get_method(int file_handle)` |`int MUD_getMethod(int fh, char* string, int strdim)` |
+|`get_apparatus(int file_handle)` |`int MUD_getApparatus(int fh, char* string, int strdim)` |
+|`get_insert(int file_handle)` |`int MUD_getInsert(int fh, char* string, int strdim)` |
+|`get_sample(int file_handle)` |`int MUD_getSample(int fh, char* string, int strdim)` |
+|`get_orientation(int file_handle)` |`int MUD_getOrient(int fh, char* string, int strdim)` |
+|`get_das(int file_handle)` |`int MUD_getDas(int fh, char* string, int strdim)` |
+|`get_experimenter(int file_handle)` |`int MUD_getExperimenter(int fh, char* string, int strdim)` |
+|`get_temperature(int file_handle)` |`int MUD_getTemperature(int fh, char* string, int strdim )` |
+|`get_field(int file_handle)` |`int MUD_getField(int fh, char* string, int strdim )` |
+
+|Cython Function (python-accessible) |C Function (wrapped) |
+| -------- | -------- |
+|`set_description(int file_handle, unsigned int pType)` |`MUD_setRunDesc(int fh, unsigned int pType)` |
+|`set_exp_number(int file_handle, unsigned int expNumber)` |`int MUD_setExptNumber(int fh, unsigned int pExpNumber)` |
+|`set_run_number(int file_handle, unsigned int runNumber)` |`int MUD_setRunNumber(int fh, unsigned int pRunNumber)` |
+|`set_elapsed_seconds(int file_handle, unsigned int elapsedSec)` |`int MUD_setElapsedSec(int fh, unsigned int pElapsedSec)` |
+|`set_start_time(int file_handle, unsigned int timeBegin)` |`int MUD_setTimeBegin(int fh, unsigned int pTimeBegin)` |
+|`set_end_time(int file_handle, unsigned int timeEnd)` |`int MUD_setTimeEnd(int fh, unsigned int pTimeEnd)` |
+|`set_title(int file_handle, str title)` |`int MUD_setTitle(int fh, char* string )` |
+|`set_lab(int file_handle, str title)` |`int MUD_setLab(int fh, char* string )` |
+|`set_area(int file_handle, str title)` |`int MUD_setArea(int fh, char* string )` |
+|`set_method(int file_handle, str title)` |`int MUD_setMethod(int fh, char* string )` |
+|`set_apparatus(int file_handle, str title)` |`int MUD_setApparatus(int fh, char* string )` |
+|`set_insert(int file_handle, str title)` |`int MUD_setInsert(int fh, char* string )` |
+|`set_sample(int file_handle, str title)` |`int MUD_setSample(int fh, char* string )` |
+|`set_orientation(int file_handle, str title)` |`int MUD_setOrient(int fh, char* string )` |
+|`set_das(int file_handle, str title)` |`int MUD_setDas(int fh, char* string )` |
+|`set_experimenter(int file_handle, str title)` |`int MUD_setExperimenter(int fh, char* string )` |
+|`set_temperature(int file_handle, str title)` |`int MUD_setTemperature(int fh, char* string )` |
+|`set_field(int file_handle, str title)` |`int MUD_setField(int fh, char* string )` |
+
+
 
 Comments
 

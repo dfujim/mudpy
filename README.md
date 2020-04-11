@@ -127,19 +127,28 @@ Headers
 |`set_temperature(int file_handle, str title)` |`int MUD_setTemperature(int fh, char* string )` |
 |`set_field(int file_handle, str title)` |`int MUD_setField(int fh, char* string )` |
 
-
-
 Comments
 
 |Cython Function (python-accessible) |C Function (wrapped) |
 | -------- | -------- |
 |`get_comments(file_handle)` |`int MUD_getComments(int fh, unsigned int* pType, unsigned int* number_of_comments)` |
-|`get_comment_prev(file_handle,comment_id_number)` |`int MUD_getCommentPrev(int fh, int num, unsigned int* pPrev )` |
-|`get_comment_next(file_handle,comment_id_number)` |`int MUD_getCommentNext(int fh, int num, unsigned int* pNext )` |
-|`get_comment_time(file_handle,comment_id_number)` |`int MUD_getCommentTime(int fh, int num, unsigned int* pTime )` |
-|`get_comment_author(file_handle,comment_id_number)` |`int MUD_getCommentAuthor(int fh, int num, char* author, int strdim )` |
-|`get_comment_title(file_handle,comment_id_number)` |`int MUD_getCommentTitle(int fh, int num, char* title, int strdim )` |
-|`get_comment_body(file_handle,comment_id_number)` |`int MUD_getCommentBody(int fh, int num, char* body, int strdim )` |
+|`get_comment_prev(file_handle,id_number)` |`int MUD_getCommentPrev(int fh, int num, unsigned int* pPrev )` |
+|`get_comment_next(file_handle,id_number)` |`int MUD_getCommentNext(int fh, int num, unsigned int* pNext )` |
+|`get_comment_time(file_handle,id_number)` |`int MUD_getCommentTime(int fh, int num, unsigned int* pTime )` |
+|`get_comment_author(file_handle,id_number)` |`int MUD_getCommentAuthor(int fh, int num, char* author, int strdim )` |
+|`get_comment_title(file_handle,id_number)` |`int MUD_getCommentTitle(int fh, int num, char* title, int strdim )` |
+|`get_comment_body(file_handle,id_number)` |`int MUD_getCommentBody(int fh, int num, char* body, int strdim )` |
+
+|Cython Function (python-accessible) |C Function (wrapped) |
+| -------- | -------- |
+|`set_comments(int file_handle, unsigned int pType, unsigned int n_comments)` |`MUD_setComments(int fh, unsigned int pType, unsigned int n_comments)` |
+|`set_comment_prev(int file_handle,id_number,unsigned int value)` |`MUD_setCommentPrev(int fh, int num, unsigned int pPrev )` |
+|`set_comment_next(int file_handle,id_number,unsigned int value)` |`MUD_setCommentNext(int fh, int num, unsigned int pNext )` |
+|`set_comment_time(int file_handle,id_number,unsigned int value)` |`MUD_setCommentTime(int fh, int num, unsigned int pTime )` |
+|`set_comment_author(int file_handle,id_number, str title)` |`MUD_setCommentAuthor(int fh, int num, char* author )` |
+|`set_comment_title(int file_handle,id_number, str title)` |`MUD_setCommentTitle(int fh, int num, char* title )` |
+|`set_comment_body(int file_handle,id_number, str title)` |`MUD_setCommentBody(int fh, int num, char* body )` |
+
 
 Histograms
 

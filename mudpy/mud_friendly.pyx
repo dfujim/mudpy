@@ -567,21 +567,21 @@ cpdef get_comment_prev(int file_handle, int id_number):
     cdef unsigned int value
     if not MUD_getCommentPrev(file_handle, id_number,&value):
         raise RuntimeError('MUD_getCommentPrev failed.')
-    return <int>value
+    return value
 
 cpdef get_comment_next(int file_handle, int id_number):
     """Returns int, id of next comment."""
     cdef unsigned int value
     if not MUD_getCommentNext(file_handle, id_number,&value):
         raise RuntimeError('MUD_getCommentNext failed.')
-    return <int>value
+    return value
 
 cpdef get_comment_time(int file_handle, int id_number):
     """Returns int, unix epoch timestamp of comment."""
     cdef unsigned int value
     if not MUD_getCommentTime(file_handle, id_number,&value):
         raise RuntimeError('MUD_getCommentTime failed.')
-    return <int>value
+    return value
 
 cpdef get_comment_author(int file_handle, int id_number):
     """Returns python string. Max number of characters: 256."""
@@ -700,84 +700,84 @@ cpdef get_hist_type(int file_handle, int id_number):
     cdef unsigned int value
     if not MUD_getHistType(file_handle, id_number,&value):
         raise RuntimeError('MUD_getHistType failed.')
-    return <int>value
+    return value
 
 cpdef get_hist_n_bytes(int file_handle, int id_number):
     """Returns int."""
     cdef unsigned int value
     if not MUD_getHistNumBytes(file_handle, id_number,&value):
         raise RuntimeError('MUD_getHistNumBytes failed.')
-    return <int>value
+    return value
 
 cpdef get_hist_n_bins(int file_handle, int id_number):
     """Returns int. Number of bins in histogram."""
     cdef unsigned int value
     if not MUD_getHistNumBins(file_handle, id_number,&value):
         raise RuntimeError('MUD_getHistNumBins failed.')
-    return <int>value
+    return value
 
 cpdef get_hist_bytes_per_bin(int file_handle, int id_number):
     """Returns int."""
     cdef unsigned int value
     if not MUD_getHistBytesPerBin(file_handle, id_number,&value):
         raise RuntimeError('MUD_getHistBytesPerBin failed.')
-    return <int>value
+    return value
 
 cpdef get_hist_fs_per_bin(int file_handle, int id_number):
     """Returns int."""
     cdef unsigned int value
     if not MUD_getHistFsPerBin(file_handle, id_number,&value):
         raise RuntimeError('MUD_getHistFsPerBin failed.')
-    return <int>value
+    return value
     
 cpdef get_hist_t0_ps(int file_handle, int id_number):
     """Returns int. Initial time of first bin, given in picoseconds."""
     cdef unsigned int value
     if not MUD_getHistT0_Ps(file_handle, id_number,&value):
         raise RuntimeError('MUD_getHistT0_Ps failed.')
-    return <int>value
+    return value
     
 cpdef get_hist_t0_bin(int file_handle, int id_number):
     """Returns int. Bin label of bin associated with time t0."""
     cdef unsigned int value
     if not MUD_getHistT0_Bin(file_handle, id_number,&value):
         raise RuntimeError('MUD_getHistT0_Bin failed.')
-    return <int>value
+    return value
 
 cpdef get_hist_good_bin1(int file_handle, int id_number):
     """Returns int."""
     cdef unsigned int value
     if not MUD_getHistGoodBin1(file_handle, id_number,&value):
         raise RuntimeError('MUD_getHistGoodBin1 failed.')
-    return <int>value
+    return value
 
 cpdef get_hist_good_bin2(int file_handle, int id_number):
     """Returns int."""
     cdef unsigned int value
     if not MUD_getHistGoodBin2(file_handle, id_number,&value):
         raise RuntimeError('MUD_getHistGoodBin2 failed.')
-    return <int>value
+    return value
     
 cpdef get_hist_background1(int file_handle, int id_number):
     """Returns int."""
     cdef unsigned int value
     if not MUD_getHistBkgd1(file_handle, id_number,&value):
         raise RuntimeError('MUD_getHistBkgd1 failed.')
-    return <int>value    
+    return value    
 
 cpdef get_hist_background2(int file_handle, int id_number):
     """Returns int."""
     cdef unsigned int value
     if not MUD_getHistBkgd2(file_handle, id_number,&value):
         raise RuntimeError('MUD_getHistBkgd2 failed.')
-    return <int>value    
+    return value    
 
 cpdef get_hist_n_events(int file_handle, int id_number):
     """Returns int."""
     cdef unsigned int value
     if not MUD_getHistNumEvents(file_handle, id_number,&value):
         raise RuntimeError('MUD_getHistNumEvents failed.')
-    return <int>value    
+    return value    
     
 cpdef get_hist_title(int file_handle, int id_number):
     """Returns python string. Max number of characters: 256."""
@@ -1117,21 +1117,21 @@ cpdef get_ivar_element_size(int file_handle, int id_number):
     cdef unsigned int value
     if not MUD_getIndVarElemSize(file_handle, id_number, &value):
         raise RuntimeError('MUD_getIndVarElemSize failed.')
-    return <int>value
+    return value
     
 cpdef get_ivar_data_type(int file_handle, int id_number):
     """Returns data type of elements in array""" 
     cdef unsigned int value
     if not MUD_getIndVarDataType(file_handle, id_number, &value):
         raise RuntimeError('MUD_getIndVarDataType failed.')
-    return <int>value
+    return value
     
 cpdef get_ivar_has_time(int file_handle, int id_number):
     """Indicates whether or not there is time data""" 
     cdef unsigned int value
     if not MUD_getIndVarHasTime(file_handle, id_number, &value):
         raise RuntimeError('MUD_getIndVarHasTime failed.')
-    return <int>value
+    return value
   
 cpdef get_ivar_data(int file_handle, int id_number):
     """Returns array of saved data""" 

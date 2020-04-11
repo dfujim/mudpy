@@ -154,23 +154,43 @@ Histograms
 
 |Cython Function (python-accessible) |C Function (wrapped) |
 | -------- | -------- |
-|`get_hists(file_handle)` |`int MUD_getHists( int fh, unsigned int* pType, unsigned int* pNum )` |
-|`get_hist_type(file_handle,hist_id_number)` |`int MUD_getHistType( int fh, int num, unsigned int* pType )` |
-|`get_hist_n_bytes(file_handle,hist_id_number)` |`int MUD_getHistNumBytes( int fh, int num, unsigned int* pNumBytes )` |
-|`get_hist_n_bins(file_handle,hist_id_number)` |`int MUD_getHistNumBins( int fh, int num, unsigned int* pNumBins )` |
-|`get_hist_bytes_per_bin(file_handle,hist_id_number)` |`int MUD_getHistBytesPerBin( int fh, int num, unsigned int* pBytesPerBin )` |
-|`get_hist_fs_per_bin(file_handle,hist_id_number)` |`int MUD_getHistFsPerBin( int fh, int num, unsigned int* pFsPerBin )` |
-|`get_hist_t0_ps(file_handle,hist_id_number)` |`int MUD_getHistT0_Ps( int fh, int num, unsigned int* pT0_ps )` |
-|`get_hist_t0_bin(file_handle,hist_id_number)` |`int MUD_getHistT0_Bin( int fh, int num, unsigned int* pT0_bin )` |
-|`get_hist_good_bin1(file_handle,hist_id_number)` |`int MUD_getHistGoodBin1( int fh, int num, unsigned int* pGoodBin1 )` |
-|`get_hist_good_bin2(file_handle,hist_id_number)` |`int MUD_getHistGoodBin2( int fh, int num, unsigned int* pGoodBin2 )` |
-|`get_hist_background1(file_handle,hist_id_number)` |`int MUD_getHistBkgd1( int fh, int num, unsigned int* pBkgd1 )` |
-|`get_hist_background2(file_handle,hist_id_number)` |`int MUD_getHistBkgd2( int fh, int num, unsigned int* pBkgd2 )` |
-|`get_hist_n_events(file_handle,hist_id_number)` |`int MUD_getHistNumEvents( int fh, int num, unsigned int* pNumEvents )` |
-|`get_hist_title(file_handle,hist_id_number)` |`int MUD_getHistTitle( int fh, int num, char* title, int strdim )` |
-|`get_hist_sec_per_bin(file_handle,hist_id_number)` |`int MUD_getHistSecondsPerBin( int fh, int num, double* pSecondsPerBin )` |
-|`get_hist_data(file_handle,hist_id_number)` |`int MUD_getHistData( int fh, int num, void* pData )` |
-|`get_hist_data_pointer(file_handle,hist_id_number)` |`int MUD_getHistpData( int fh, int num, void** ppData )` |
+|`get_hists(int file_handle)` |`int MUD_getHists( int fh, unsigned int* pType, unsigned int* pNum )` |
+|`get_hist_type(int file_handle, int id_number)` |`int MUD_getHistType( int fh, int num, unsigned int* pType )` |
+|`get_hist_n_bytes(int file_handle, int id_number)` |`int MUD_getHistNumBytes( int fh, int num, unsigned int* pNumBytes )` |
+|`get_hist_n_bins(int file_handle, int id_number)` |`int MUD_getHistNumBins( int fh, int num, unsigned int* pNumBins )` |
+|`get_hist_bytes_per_bin(int file_handle, int id_number)` |`int MUD_getHistBytesPerBin( int fh, int num, unsigned int* pBytesPerBin )` |
+|`get_hist_fs_per_bin(int file_handle, int id_number)` |`int MUD_getHistFsPerBin( int fh, int num, unsigned int* pFsPerBin )` |
+|`get_hist_t0_ps(int file_handle, int id_number)` |`int MUD_getHistT0_Ps( int fh, int num, unsigned int* pT0_ps )` |
+|`get_hist_t0_bin(int file_handle, int id_number)` |`int MUD_getHistT0_Bin( int fh, int num, unsigned int* pT0_bin )` |
+|`get_hist_good_bin1(int file_handle, int id_number)` |`int MUD_getHistGoodBin1( int fh, int num, unsigned int* pGoodBin1 )` |
+|`get_hist_good_bin2(int file_handle, int id_number)` |`int MUD_getHistGoodBin2( int fh, int num, unsigned int* pGoodBin2 )` |
+|`get_hist_background1(int file_handle, int id_number)` |`int MUD_getHistBkgd1( int fh, int num, unsigned int* pBkgd1 )` |
+|`get_hist_background2(int file_handle, int id_number)` |`int MUD_getHistBkgd2( int fh, int num, unsigned int* pBkgd2 )` |
+|`get_hist_n_events(int file_handle, int id_number)` |`int MUD_getHistNumEvents( int fh, int num, unsigned int* pNumEvents )` |
+|`get_hist_title(int file_handle, int id_number)` |`int MUD_getHistTitle( int fh, int num, char* title, int strdim )` |
+|`get_hist_sec_per_bin(int file_handle, int id_number)` |`int MUD_getHistSecondsPerBin( int fh, int num, double* pSecondsPerBin )` |
+|`get_hist_data(int file_handle, int id_number)` |`int MUD_getHistData( int fh, int num, void* pData )` |
+
+|Cython Function (python-accessible) |C Function (wrapped) |
+| -------- | -------- |
+|`set_hists(int file_handle, unsigned int number_histograms)` |`int MUD_setHists( int fh, unsigned int pType, unsigned int pNum )` |
+|`set_hist_type(int file_handle, int id_number, unsigned int pType)` |`int MUD_setHistType( int fh, int num, unsigned int pType )` |
+|`set_hist_n_bytes(int file_handle, int id_number, unsigned int value)` |`int MUD_setHistNumBytes( int fh, int num, unsigned int pNumBytes )` |
+|`set_hist_n_bins(int file_handle, int id_number, unsigned int value)` |`int MUD_setHistNumBins( int fh, int num, unsigned int pNumBins )` |
+|`set_hist_bytes_per_bin(int file_handle, int id_number, unsigned int value)` |`int MUD_setHistBytesPerBin( int fh, int num, unsigned int pBytesPerBin )` |
+|`set_hist_fs_per_bin(int file_handle, int id_number, unsigned int value)` |`int MUD_setHistFsPerBin( int fh, int num, unsigned int pFsPerBin )` |
+|`set_hist_t0_ps(int file_handle, int id_number, unsigned int value)` |`int MUD_setHistT0_Ps( int fh, int num, unsigned int pT0_ps )` |
+|`set_hist_t0_bin(int file_handle, int id_number, unsigned int value)` |`int MUD_setHistT0_Bin( int fh, int num, unsigned int pT0_bin )` |
+|`set_hist_good_bin1(int file_handle, int id_number, unsigned int value)` |`int MUD_setHistGoodBin1( int fh, int num, unsigned int pGoodBin1 )` |
+|`set_hist_good_bin2(int file_handle, int id_number, unsigned int value)` |`int MUD_setHistGoodBin2( int fh, int num, unsigned int pGoodBin2 )` |
+|`set_hist_background1(int file_handle, int id_number, unsigned int value)` |`int MUD_setHistBkgd1( int fh, int num, unsigned int pBkgd1 )` |
+|`set_hist_background2(int file_handle, int id_number, unsigned int value)` |`int MUD_setHistBkgd2( int fh, int num, unsigned int pBkgd2 )` |
+|`set_hist_n_events(int file_handle, int id_number, unsigned int value)` |`int MUD_setHistNumEvents( int fh, int num, unsigned int pNumEvents )` |
+|`set_hist_title(int file_handle, int id_number, str title)` |`int MUD_setHistTitle( int fh, int num, char* title )` |
+|`set_hist_sec_per_bin(int file_handle, int id_number, unsigned int value)` |`int MUD_setHistSecondsPerBin( int fh, int num, double pSecondsPerBin )` |
+|`set_hist_data(int file_handle, int id_number, long[:] data_array)` |`int MUD_setHistData( int fh, int num, void* pData )` |
+
+
 
 Scalers
 

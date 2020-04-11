@@ -32,6 +32,12 @@ mud-data object. The mdata object is a data container designed for easy reading 
 
 Example: `mud = mdata('filename.msr')`
 
+**Functions**: 
+
+| Signature | Description |
+| -------- | -------- |
+| [`set_description(mode)`](https://github.com/dfujim/mudpy/blob/1b0fbad32520e57554480630faaaddc9949311b5/mudpy/mdata.py#L387-L392)     | Mode is one of "TD" or "TI". |
+| [`write(filename)`](https://github.com/dfujim/mudpy/blob/1b0fbad32520e57554480630faaaddc9949311b5/mudpy/mdata.py#L400-L403)     | Write to file |
 
 ## Misc Features
 

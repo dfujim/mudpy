@@ -11,6 +11,11 @@ Function list:
     FILE IO
         open_read
         close_read
+            
+        open_write
+        open_readwrite
+        close_write
+        close_writefile
         
     RUN DESCRIPTION 
         get_description
@@ -31,6 +36,25 @@ Function list:
         get_experimenter
         get_temperature
         get_field
+
+        set_description
+        set_exp_number
+        set_run_number
+        set_elapsed_seconds
+        set_start_time
+        set_end_time
+        set_title
+        set_lab
+        set_area
+        set_method
+        set_apparatus
+        set_insert
+        set_sample
+        set_orientation
+        set_das
+        set_experimenter
+        set_temperature
+        set_field
     
     COMMENTS
         get_comments
@@ -40,6 +64,14 @@ Function list:
         get_comment_author
         get_comment_title
         get_comment_body
+        
+        set_comments
+        set_comment_prev
+        set_comment_next
+        set_comment_time
+        set_comment_author
+        set_comment_title
+        set_comment_body
         
     HISTOGRAMS
         get_hists
@@ -60,10 +92,32 @@ Function list:
         get_hist_data
         get_hist_data_pointer
         
+        set_hists
+        set_hist_type
+        set_hist_n_bytes
+        set_hist_n_bins
+        set_hist_bytes_per_bin
+        set_hist_fs_per_bin
+        set_hist_t0_ps
+        set_hist_t0_bin
+        set_hist_good_bin1
+        set_hist_good_bin2
+        set_hist_background1
+        set_hist_background2
+        set_hist_n_events
+        set_hist_title
+        set_hist_sec_per_bin
+        set_hist_data
+        set_hist_data_pointer
+        
     SCALARS
         get_scalers
         get_scaler_label
         get_scaler_counts
+        
+        set_scalers
+        set_scaler_label
+        set_scaler_counts
         
     INDEPENDENT VARIABLES
         get_ivars
@@ -75,7 +129,28 @@ Function list:
         get_ivar_name
         get_ivar_description
         get_ivar_units
-
+        get_ivar_n_data
+        get_ivar_element_size
+        get_ivar_data_type
+        get_ivar_has_time
+        get_ivar_data
+        get_ivar_time_data
+        
+        set_ivars
+        set_ivar_low
+        set_ivar_high
+        set_ivar_mean
+        set_ivar_std
+        set_ivar_skewness
+        set_ivar_name
+        set_ivar_description
+        set_ivar_units
+        set_ivar_n_data
+        set_ivar_element_size
+        set_ivar_data_type
+        set_ivar_data
+        set_ivar_time_data
+                
 Derek Fujimoto 
 July 2017
 """

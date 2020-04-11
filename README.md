@@ -72,7 +72,7 @@ Wrap the [mud_friendly.c](http://musr.ca/mud/mud_friendly.html) functions using 
 
 **Functions**: 
 
-File IO
+## File IO
 
 |Cython Function (python-accessible) |C Function (wrapped) |
 | -------- | -------- |
@@ -83,7 +83,7 @@ File IO
 |`close_write(int file_handle)` |`MUD_closeWrite(int file_handle)` |
 |`close_writefile(int file_handle, str file_name)` |`MUD_closeWriteFile(int file_handle, char* file_name)` |
 
-Headers
+## Headers
 
 |Cython Function (python-accessible) |C Function (wrapped) |
 | -------- | -------- |
@@ -127,7 +127,7 @@ Headers
 |`set_temperature(int file_handle, str title)` |`int MUD_setTemperature(int fh, char* string )` |
 |`set_field(int file_handle, str title)` |`int MUD_setField(int fh, char* string )` |
 
-Comments
+## Comments
 
 |Cython Function (python-accessible) |C Function (wrapped) |
 | -------- | -------- |
@@ -150,7 +150,7 @@ Comments
 |`set_comment_body(int file_handle,id_number, str title)` |`MUD_setCommentBody(int fh, int num, char* body )` |
 
 
-Histograms
+## Histograms
 
 |Cython Function (python-accessible) |C Function (wrapped) |
 | -------- | -------- |
@@ -190,26 +190,54 @@ Histograms
 |`set_hist_sec_per_bin(int file_handle, int id_number, unsigned int value)` |`int MUD_setHistSecondsPerBin( int fh, int num, double pSecondsPerBin )` |
 |`set_hist_data(int file_handle, int id_number, long[:] data_array)` |`int MUD_setHistData( int fh, int num, void* pData )` |
 
-
-
-Scalers
+## Scalers
 
 |Cython Function (python-accessible) |C Function (wrapped) |
 | -------- | -------- |
-|`get_scalers(file_handle)` |`int MUD_getScalers( int fh, unsigned int* pType, unsigned int* pNum )` |
-|`get_scaler_label(file_handle,scalar_id_number)` |`int MUD_getScalerLabel( int fh, int num, char* label, int strdim )` |
-|`get_scaler_counts(file_handle,scalar_id_number)` |`int MUD_getScalerCounts( int fh, int num, unsigned int* pCounts )` |
-
-Independent Variables
+|`get_scalers(int file_handle)` |`int MUD_getScalers( int fh, unsigned int* pType, unsigned int* pNum )` |
+|`get_scaler_label(int file_handle,int id_number)` |`int MUD_getScalerLabel( int fh, int num, char* label, int strdim )` |
+|`get_scaler_counts(int file_handle,int id_number)` |`int MUD_getScalerCounts( int fh, int num, unsigned int* pCounts )` |
 
 |Cython Function (python-accessible) |C Function (wrapped) |
 | -------- | -------- |
-|`get_ivars(file_handle)` |`int MUD_getIndVars(int fh, unsigned int* pType, unsigned int* number_of_variables)` |
-|`get_ivar_low(file_handle,variable_id_number)` |`int MUD_getIndVarLow( int fh, int num, double* pLow )` |
-|`get_ivar_high(file_handle,variable_id_number)` |`int MUD_getIndVarHigh( int fh, int num, double* pHigh )` |
-|`get_ivar_mean(file_handle,variable_id_number)` |`int MUD_getIndVarMean( int fh, int num, double* pMean )` |
-|`get_ivar_std(file_handle,variable_id_number)` |`int MUD_getIndVarStddev( int fh, int num, double* pStddev )` |
-|`get_ivar_skewness(file_handle,variable_id_number)` |`int MUD_getIndVarSkewness( int fh, int num, double* pSkewness )` |
-|`get_ivar_name(file_handle,variable_id_number)` |`int MUD_getIndVarName( int fh, int num, char* name, int strdim )` |
-|`get_ivar_description(file_handle,variable_id_number)` |`int MUD_getIndVarDescription( int fh, int num, char* description,int strdim)` |
-|`get_ivar_units(file_handle,variable_id_number)` |`int MUD_getIndVarUnits( int fh, int num, char* units, int strdim )` |
+|`set_scalers(int file_handle, unsigned int pType, unsigned int number_scalars)` |`MUD_setScalers( int fh, unsigned int pType, unsigned int pNum )` |
+|`set_scaler_label(int file_handle, int id_number, str title)` |`MUD_setScalerLabel( int fh, int num, char* label)` |
+|`set_scaler_counts(int file_handle, int id_number, str title)` |`MUD_setScalerCounts( int fh, int num, unsigned int* pCounts )` |
+
+
+## Independent Variables
+
+|Cython Function (python-accessible) |C Function (wrapped) |
+| -------- | -------- |
+|`get_ivars(int file_handle)` |`MUD_getIndVars(int fh, unsigned int* pType, unsigned int* number_of_variables)` |
+|`get_ivar_low(int file_handle,int id_number)` |`MUD_getIndVarLow( int fh, int num, double* pLow )` |
+|`get_ivar_high(int file_handle,int id_number)` |`MUD_getIndVarHigh( int fh, int num, double* pHigh )` |
+|`get_ivar_mean(int file_handle,int id_number)` |`MUD_getIndVarMean( int fh, int num, double* pMean )` |
+|`get_ivar_std(int file_handle,int id_number)` |`MUD_getIndVarStddev( int fh, int num, double* pStddev )` |
+|`get_ivar_skewness(int file_handle,int id_number)` |`MUD_getIndVarSkewness( int fh, int num, double* pSkewness )` |
+|`get_ivar_name(int file_handle,int id_number)` |`MUD_getIndVarName( int fh, int num, char* name, int strdim )` |
+|`get_ivar_description(int file_handle,int id_number)` |`MUD_getIndVarDescription( int fh, int num, char* description,int strdim)` |
+|`get_ivar_units(int file_handle,int id_number)` |`MUD_getIndVarUnits( int fh, int num, char* units, int strdim )` |
+|`get_ivar_n_data(int file_handle, int id_number)` |`MUD_getIndVarNumData( int fh, int num, unsigned int* pNumData )` |
+|`get_ivar_element_size(int file_handle, int id_number)` |`MUD_getIndVarElemSize( int fh, int num, unsigned int* pElemSize )` |
+|`get_ivar_data_type(int file_handle, int id_number)` |`MUD_getIndVarDataType( int fh, int num, unsigned int* pDataType )` |
+|`get_ivar_has_time(int file_handle, int id_number)` |`MUD_getIndVarHasTime( int fh, int num, unsigned int* pHasTime )` |
+|`get_ivar_data(int file_handle, int id_number)` |`MUD_getIndVarData( int fh, int num, void* pData )` |
+|`get_ivar_time_data(int file_handle, int id_number)` |`MUD_getIndVarTimeData( int fh, int num, void* pTimeData )` |
+
+|Cython Function (python-accessible) |C Function (wrapped) |
+| -------- | -------- |
+|`set_ivars(int file_handle, unsigned int pType, unsigned int n_vars)` |`MUD_setIndVars(int fh, unsigned int pType, unsigned int number_of_variables)` |
+|`set_ivar_low(int file_handle,int id_number, double value)` |`MUD_setIndVarLow( int fh, int num, double pLow )` |
+|`set_ivar_high(int file_handle,int id_number, double value)` |`MUD_setIndVarHigh( int fh, int num, double pHigh )` |
+|`set_ivar_mean(int file_handle,int id_number, double value)` |`MUD_setIndVarMean( int fh, int num, double pMean )` |
+|`set_ivar_std(int file_handle,int id_number, double value)` |`MUD_setIndVarStddev( int fh, int num, double pStddev )` |
+|`set_ivar_skewness(int file_handle,int id_number, double value)` |`MUD_setIndVarSkewness( int fh, int num, double pSkewness )` |
+|`set_ivar_name(int file_handle,int id_number, str title)` |`MUD_setIndVarName( int fh, int num, char* name )` |
+|`set_ivar_description(int file_handle,int id_number, str title)` |`MUD_setIndVarDescription( int fh, int num, char* description )` |
+|`set_ivar_units(int file_handle,int id_number, str title)` |`MUD_setIndVarUnits( int fh, int num, char* units )` |
+|`set_ivar_n_data(int file_handle, int id_number, unsigned int value)` |`MUD_setIndVarNumData( int fh, int num, unsigned int valule )` |
+|`set_ivar_element_size(int file_handle, int id_number, unsigned int value)` |`MUD_setIndVarElemSize( int fh, int num, unsigned int value )` |
+|`set_ivar_data_type(int file_handle, int id_number, unsigned int value)` |`MUD_setIndVarDataType( int fh, int num, unsigned int pType )` |
+|`set_ivar_data(int file_handle, int id_number, data_array)` |`MUD_setIndVarData( int fh, int num, void* pData )` |
+|`set_ivar_time_data(int file_handle, int id_number, data_array)` |`MUD_setIndVarTimeData( int fh, int num, void* pTimeData )` |

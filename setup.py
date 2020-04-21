@@ -21,7 +21,7 @@ ext = Extension("mudpy.mud_friendly",
 
 setuptools.setup(
     name="mud-py",
-    version="1.0.0",
+    version="1.0.1",
     author="Derek Fujimoto",
     author_email="fujimoto@phas.ubc.ca",
     description="MUon Data file reader",

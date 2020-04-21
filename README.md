@@ -1,6 +1,6 @@
 # Package Overview
 
-MUon (MUD) Data file reader package.
+MUon (MUD) Data file IO package.
 
 ## Setup 
 

@@ -22,16 +22,16 @@ class mcontainer(object):
             return self.__class__.__name__ + "()"
 
     # arithmatic operators
-    def __add__(self,other):        return self._get_val()+other
-    def __sub__(self,other):        return self._get_val()-other
-    def __mul__(self,other):        return self._get_val()*other
-    def __div__(self,other):        return self._get_val()/other
-    def __floordiv__(self,other):   return self._get_val()//other
-    def __mod__(self,other):        return self._get_val()%other
-    def __divmod__(self,other):     return divmod(self._get_val(),other)
-    def __pow__(self,other):        return pow(self._get_val(),other)
-    def __lshift__(self,other):     return self._get_val()<<other
-    def __rshift__(self,other):     return self._get_val()>>other
+    def __add__(self,other):        return self._get_val()+self._get_oval(other)
+    def __sub__(self,other):        return self._get_val()-self._get_oval(other)
+    def __mul__(self,other):        return self._get_val()*self._get_oval(other)
+    def __div__(self,other):        return self._get_val()/self._get_oval(other)
+    def __floordiv__(self,other):   return self._get_val()//self._get_oval(other)
+    def __mod__(self,other):        return self._get_val()%self._get_oval(other)
+    def __divmod__(self,other):     return divmod(self._get_val(),self._get_oval(other))
+    def __pow__(self,other):        return pow(self._get_val(),self._get_oval(other))
+    def __lshift__(self,other):     return self._get_val()<<self._get_oval(other)
+    def __rshift__(self,other):     return self._get_val()>>self._get_oval(other)
     def __neg__(self):              return -self._get_val()
     def __pos__(self):              return +self._get_val()
     def __abs__(self):              return abs(self._get_val())
@@ -45,46 +45,39 @@ class mcontainer(object):
     def __str__(self):              return str(self._get_val())
     
     # logic operators
-    def __eq__(self,other):     
-        if isinstance(other,mvar):  return self==other
-        else:                       return self._get_val()==other
-    def __lt__(self,other):     
-        if isinstance(other,mvar):  return self._get_val()<other._get_val()
-        else:                       return self._get_val()<other
-    def __le__(self,other):
-        if isinstance(other,mvar):  return self._get_val()<=other._get_val()
-        else:                       return self._get_val()<=other
-    def __gt__(self,other):
-        if isinstance(other,mvar):  return self._get_val()>other._get_val()
-        else:                       return self._get_val()>other
-    def __ge__(self,other):
-        if isinstance(other,mvar):  return self._get_val()>=other._get_val()
-        else:                       return self._get_val()>=other
+    def __eq__(self,other):         return self._get_val()==self._get_oval(other)
+    def __lt__(self,other):         return self._get_val()<self._get_oval(other)
+        
+    def __le__(self,other):         return self._get_val()<=self._get_oval(other)
+    def __gt__(self,other):         return self._get_val()>self._get_oval(other)
+        
+    def __ge__(self,other):         return self._get_val()>=self._get_oval(other)
     
-    def __and__(self,other):
-        if isinstance(other,mvar):  return self&other
-        else:                       return self._get_val()&other
-    def __xor__(self,other):
-        if isinstance(other,mvar):  return self^other
-        else:                       return self._get_val()^other
-    def __or__(self,other):
-        if isinstance(other,mvar):  return self|other
-        else:                       return self._get_val()|other
+    def __and__(self,other):        return self._get_val()&self._get_oval(other)
+    def __xor__(self,other):        return self._get_val()^self._get_oval(other)
+    def __or__(self,other):         return self._get_val()|self._get_oval(other)
     
     # reflected operators
-    def __radd__(self,other):       return self.__add__(other)        
-    def __rsub__(self,other):       return self.__sub__(other)        
-    def __rmul__(self,other):       return self.__mul__(other)     
-    def __rdiv__(self,other):       return self.__div__(other)    
-    def __rfloordiv__(self,other):  return self.__floordiv__(other)
-    def __rmod__(self,other):       return self.__mod__(other)      
-    def __rdivmod__(self,other):    return self.__divmod__(other)
-    def __rpow__(self,other):       return self.__pow__(other)      
-    def __rlshift__(self,other):    return self.__lshift__(other)
-    def __rrshift__(self,other):    return self.__rshift__(other)                          
-    def __rand__(self,other):       return self.__and__(other)
-    def __rxor__(self,other):       return self.__xor__(other)
-    def __ror__(self,other):        return self.__or__(other)    
+    def __radd__(self,other):       return self.__add__(self._get_oval(other))        
+    def __rsub__(self,other):       return self.__sub__(self._get_oval(other))        
+    def __rmul__(self,other):       return self.__mul__(self._get_oval(other))     
+    def __rdiv__(self,other):       return self.__div__(self._get_oval(other))    
+    def __rfloordiv__(self,other):  return self.__floordiv__(self._get_oval(other))
+    def __rmod__(self,other):       return self.__mod__(self._get_oval(other))      
+    def __rdivmod__(self,other):    return self.__divmod__(self._get_oval(other))
+    def __rpow__(self,other):       return self.__pow__(self._get_oval(other))      
+    def __rlshift__(self,other):    return self.__lshift__(self._get_oval(other))
+    def __rrshift__(self,other):    return self.__rshift__(self._get_oval(other))                          
+    def __rand__(self,other):       return self.__and__(self._get_oval(other))
+    def __rxor__(self,other):       return self.__xor__(self._get_oval(other))
+    def __ror__(self,other):        return self.__or__(self._get_oval(other))    
+
+    # get the value of the other
+    def _get_oval(self,other):
+        if hasattr(other,'_get_val'):
+            return other._get_val()
+        else:
+            return other
 
 # =========================================================================== #
 class mdict(dict):

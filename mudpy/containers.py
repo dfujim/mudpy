@@ -157,6 +157,7 @@ class mhist(mcontainer):
     
     def _get_val(self):     return self.data
     def astype(self,type):  return self.data.astype(type)
+    def __len__(self):      return len(self.data)
     
 # =========================================================================== #
 class mscaler(mcontainer):

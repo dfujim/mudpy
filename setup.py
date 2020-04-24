@@ -17,7 +17,7 @@ ext = Extension("mudpy.mud_friendly",
                          "./mud_src/mud_tri_ti.c",
                          "./mud_src/mud_misc.c",
                          "./mud_src/mud_new.c"],
-                include_dirs=['./mud_src/'])
+                include_dirs=['./mud_src/',numpy.get_include()])
 
 setuptools.setup(
     name="mud-py",

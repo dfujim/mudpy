@@ -640,14 +640,14 @@ cpdef get_comments(int file_handle, unsigned int pType = GRP_CMT_ID):
 cpdef get_comment_prev(int file_handle, int id_number):
     """Returns int, id of previous comment."""
     cdef unsigned int value
-    if not MUD_getCommentPrev(file_handle, id_number,&value):
+    if not MUD_getCommentPrev(file_handle, id_number, &value):
         raise RuntimeError('MUD_getCommentPrev failed.')
     return value
 
 cpdef get_comment_next(int file_handle, int id_number):
     """Returns int, id of next comment."""
     cdef unsigned int value
-    if not MUD_getCommentNext(file_handle, id_number,&value):
+    if not MUD_getCommentNext(file_handle, id_number, &value):
         raise RuntimeError('MUD_getCommentNext failed.')
     return value
 
@@ -661,22 +661,22 @@ cpdef get_comment_time(int file_handle, int id_number):
 cpdef get_comment_author(int file_handle, int id_number):
     """Returns python string. Max number of characters: 256."""
     cdef char title[256]
-    if not MUD_getCommentAuthor(file_handle, id_number, title,256):
+    if not MUD_getCommentAuthor(file_handle, id_number, title, 256):
         raise RuntimeError('MUD_getCommentAuthor failed.')
     return <object>(title.decode('latin1'))
 
 cpdef get_comment_title(int file_handle, int id_number):
     """Returns python string. Max number of characters: 256."""
     cdef char title[256]
-    if not MUD_getCommentTitle(file_handle, id_number, title,256):
+    if not MUD_getCommentTitle(file_handle, id_number, title, 256):
         raise RuntimeError('MUD_getCommentTitle failed.')
     return <object>(title.decode('latin1'))
     
 cpdef get_comment_body(int file_handle, int id_number):
     """Returns python string. Max number of characters: 8192."""
     cdef char title[8192]
-    if not MUD_getCommentAuthor(file_handle, id_number, title,8192):
-        raise RuntimeError('MUD_getCommentAuthor failed.')
+    if not MUD_getCommentBody(file_handle, id_number, title, 8192):
+        raise RuntimeError('MUD_getCommentBody failed.')
     return <object>(title.decode('latin1'))
         
 ### ======================================================================= ###

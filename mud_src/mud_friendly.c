@@ -3,7 +3,7 @@
  *
  *    A friendly programming interface to the MUD library
  *
- *  Copyright (c) 1996-2011 TRIUMF Cyclotron Facility
+ *  Copyright (c) 1996-2020 TRIUMF Cyclotron Facility
  *
  *  Author: 
  *    Ted Whidden, TRIUMF Data Acquisition Group
@@ -31,6 +31,7 @@
  *                            always terminate.
  *    22-Apr-2003  v1.6  DJA  Add mud_openReadWrite
  *    25-May-2011  v1.7  DJA  Fix cast in MUD_setHistSecondsPerBin
+ *    15-Oct-2020  v1.8  DF   Fix group/instance numbers in _sea_cmtgrp
  *
  *  Description:
  *
@@ -683,7 +684,7 @@ _idesc_char_setproc( MUD_setComment3, comment3 )
  */
 #define _sea_cmtgrp( fd ) \
   pMUD_cmtGrp = (MUD_SEC_GRP*)MUD_search( pMUD_fileGrp[fd]->pMem,       \
-                          MUD_GRP_CMT_ID, (UINT32)1, \
+                          MUD_SEC_GRP_ID, MUD_GRP_CMT_ID, \
                           (UINT32)0 ); \
   if( pMUD_cmtGrp == NULL ) return( 0 )
 

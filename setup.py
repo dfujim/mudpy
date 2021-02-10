@@ -21,7 +21,7 @@ ext = Extension("mudpy.mud_friendly",
 
 setuptools.setup(
     name="mud-py",
-    version="1.0.3",
+    version="1.1.0",
     author="Derek Fujimoto",
     author_email="fujimoto@phas.ubc.ca",
     description="MUon Data file reader",
@@ -39,7 +39,7 @@ setuptools.setup(
         "Operating System :: MacOS",
         "Development Status :: 5 - Production/Stable",
     ],
-    install_requires=['cython>=0.28','numpy>=1.14'],
+    install_requires=['cython>=0.28','numpy>=1.19'],
     ext_modules = cythonize([ext],include_path =[numpy.get_include()]),
 )
 

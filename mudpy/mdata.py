@@ -35,7 +35,7 @@ __doc__="""
             access.
             
             mdict objects all allow assignment and fetching of dictionary keys 
-            as if they were attributes. Note that one can replace "+" with "p",
+            as if they were attributes. Note that one can replace "+" with "p", 
             and "-" with "m" to allow fetching of histograms. 
         
     Derek Fujimoto
@@ -79,92 +79,92 @@ class mdata(object):
     # prefixed with "get_" or "set_"
     
     description_attribute_functions = { 
-                            'description':  'description',
-                            'exp':          'exp_number',
-                            'run':          'run_number',
-                            'duration':     'elapsed_seconds',
-                            'start_time':   'start_time',
-                            'end_time':     'end_time',
-                            'title':        'title',
-                            'lab':          'lab',
-                            'area':         'area',
-                            'method':       'method',
-                            'apparatus':    'apparatus',
-                            'mode':         'insert',
-                            'sample':       'sample',
-                            'orientation':  'orientation',
-                            'das':          'das',
-                            'experimenter': 'experimenter',
-                            'temperature':  'temperature',
-                            'field':        'field',
+                            'description':  'description', 
+                            'exp':          'exp_number', 
+                            'run':          'run_number', 
+                            'duration':     'elapsed_seconds', 
+                            'start_time':   'start_time', 
+                            'end_time':     'end_time', 
+                            'title':        'title', 
+                            'lab':          'lab', 
+                            'area':         'area', 
+                            'method':       'method', 
+                            'apparatus':    'apparatus', 
+                            'mode':         'insert', 
+                            'sample':       'sample', 
+                            'orientation':  'orientation', 
+                            'das':          'das', 
+                            'experimenter': 'experimenter', 
+                            'temperature':  'temperature', 
+                            'field':        'field', 
         }
     
     histogram_attribute_functions = {
-                            'htype':        'hist_type',
-                            'title':        'hist_title',
-                            'n_bytes':      'hist_n_bytes',
-                            'n_bins':       'hist_n_bins',
-                            'n_events':     'hist_n_events',
-                            'fs_per_bin':   'hist_fs_per_bin',
-                            's_per_bin':    'hist_sec_per_bin',
-                            't0_ps':        'hist_t0_ps',
-                            't0_bin':       'hist_t0_bin',
-                            'good_bin1':    'hist_good_bin1',
-                            'good_bin2':    'hist_good_bin2',
-                            'background1':  'hist_background1',
-                            'background2':  'hist_background2',
-                            'data':         'hist_data',
+                            'htype':        'hist_type', 
+                            'title':        'hist_title', 
+                            'n_bytes':      'hist_n_bytes', 
+                            'n_bins':       'hist_n_bins', 
+                            'n_events':     'hist_n_events', 
+                            'fs_per_bin':   'hist_fs_per_bin', 
+                            's_per_bin':    'hist_sec_per_bin', 
+                            't0_ps':        'hist_t0_ps', 
+                            't0_bin':       'hist_t0_bin', 
+                            'good_bin1':    'hist_good_bin1', 
+                            'good_bin2':    'hist_good_bin2', 
+                            'background1':  'hist_background1', 
+                            'background2':  'hist_background2', 
+                            'data':         'hist_data', 
                             }
     
     scaler_attribute_functions = {
-                            'counts_total_recent':  'scaler_counts',
-                            'title':                'scaler_label',
+                            'counts_total_recent':  'scaler_counts', 
+                            'title':                'scaler_label', 
                             }   
     
     variable_attribute_functions = {
-                            'low':          'ivar_low',
-                            'high':         'ivar_high',
-                            'mean':         'ivar_mean',
-                            'std':          'ivar_std',
-                            'skew':         'ivar_skewness',
-                            'title':        'ivar_name',
-                            'description':  'ivar_description',
-                            'units':        'ivar_units',
+                            'low':          'ivar_low', 
+                            'high':         'ivar_high', 
+                            'mean':         'ivar_mean', 
+                            'std':          'ivar_std', 
+                            'skew':         'ivar_skewness', 
+                            'title':        'ivar_name', 
+                            'description':  'ivar_description', 
+                            'units':        'ivar_units', 
                             }
     
     comment_attribute_functions = {
-                            'title':        'comment_title',
-                            'time':         'comment_time',
-                            'author':       'comment_author',
-                            'body':         'comment_body',
+                            'title':        'comment_title', 
+                            'time':         'comment_time', 
+                            'author':       'comment_author', 
+                            'body':         'comment_body', 
                             }
                 
     # default non-mdict attributes for writing if empty construction 
-    default_attributes = ('apparatus','area','das','description','duration',
-                          'end_time','exp','experimenter','lab','method','mode',
-                          'orientation','run','sample','start_time','title',
+    default_attributes = ('apparatus', 'area', 'das', 'description', 'duration', 
+                          'end_time', 'exp', 'experimenter', 'lab', 'method', 'mode', 
+                          'orientation', 'run', 'sample', 'start_time', 'title', 
                           'year')
     
     # conversion from string method to int method 
-    mud_method = {'TD':{'file':     mud.FMT_TRI_TD_ID,
-                        'descr':    mud.SEC_GEN_RUN_DESC_ID,
-                        'hist':     mud.GRP_TRI_TD_HIST_ID,
-                        'sclr':     mud.GRP_TRI_TD_SCALER_ID,
-                        'ivar':     mud.GRP_GEN_IND_VAR_ID,
+    mud_method = {'TD':{'file':     mud.FMT_TRI_TD_ID, 
+                        'descr':    mud.SEC_GEN_RUN_DESC_ID, 
+                        'hist':     mud.GRP_TRI_TD_HIST_ID, 
+                        'sclr':     mud.GRP_TRI_TD_SCALER_ID, 
+                        'ivar':     mud.GRP_GEN_IND_VAR_ID, 
                         'comments': mud.GRP_CMT_ID
-                       },
+                       }, 
                   
-                  'TI':{'file':     mud.FMT_TRI_TI_ID,
-                        'descr':    mud.SEC_TRI_TI_RUN_DESC_ID,
-                        'hist':     mud.GRP_TRI_TI_HIST_ID,
-                        'sclr':     mud.GRP_GEN_SCALER_ID,
-                        'ivar':     mud.GRP_GEN_IND_VAR_ARR_ID,
+                  'TI':{'file':     mud.FMT_TRI_TI_ID, 
+                        'descr':    mud.SEC_TRI_TI_RUN_DESC_ID, 
+                        'hist':     mud.GRP_TRI_TI_HIST_ID, 
+                        'sclr':     mud.GRP_GEN_SCALER_ID, 
+                        'ivar':     mud.GRP_GEN_IND_VAR_ARR_ID, 
                         'comments': mud.GRP_CMT_ID
                        }, 
                   }
     
     # ======================================================================= #    
-    def __init__(self,filename=''):
+    def __init__(self, filename=''):
         """
             Constructor. Reads file or sets file up for writing.
             
@@ -178,25 +178,25 @@ class mdata(object):
         # set up for writing
         else:
             for attr in self.default_attributes:
-                setattr(self,attr,None)
-            for attr in ('hist','sclr','ivar'):
-                setattr(self,attr,mdict())
+                setattr(self, attr, None)
+            for attr in ('hist', 'sclr', 'ivar'):
+                setattr(self, attr, mdict())
         
     # ======================================================================= #
-    def __getattr__(self,name):
+    def __getattr__(self, name):
         
         try:
             # fetch from top level
-            return getattr(object,name)
+            return getattr(object, name)
         except AttributeError as err:
             
             # fetching of second level
-            if hasattr(self,'hist'):
-                return getattr(self.hist,name)
-            if hasattr(self,'ivar'): 
-                return getattr(self.ivar,name)
-            if hasattr(self,'sclr'): 
-                return getattr(self.sclr,name)
+            if hasattr(self, 'hist'):
+                return getattr(self.hist, name)
+            if hasattr(self, 'ivar'): 
+                return getattr(self.ivar, name)
+            if hasattr(self, 'sclr'): 
+                return getattr(self.sclr, name)
                     
             # nothing worked - raise error
             raise AttributeError(err) from None
@@ -216,26 +216,26 @@ class mdata(object):
                 if key[0] == '_': continue
                 
                 # non iterables and mdict objects
-                if not hasattr(d[key],'__iter__') or d[key].__class__ == mdict:
-                    items.append([key,d[key]])                
+                if not hasattr(d[key], '__iter__') or d[key].__class__ == mdict:
+                    items.append([key, d[key]])                
                 
                 # strings
                 elif d[key].__class__ == str:
-                    items.append([key,d[key]])                
+                    items.append([key, d[key]])                
                 
                 # misc objects
                 else:
-                    items.append([key,d[key].__class__])
+                    items.append([key, d[key].__class__])
                 
                             
-            m = max(map(len,dkeys)) + 1
+            m = max(map(len, dkeys)) + 1
             s = '\n'.join([k.rjust(m)+': '+repr(v) for k, v in sorted(items)])
             return s
         else:
             return self.__class__.__name__ + "()"
     
     # ======================================================================= #
-    def _read_file(self,filename):
+    def _read_file(self, filename):
         """
             Read file into memory.
         """
@@ -247,42 +247,42 @@ class mdata(object):
             raise RuntimeError("Open file %s failed. " % filename) from None
         try:
             # Read run description
-            for attr,func_name in self.description_attribute_functions.items():
+            for attr, func_name in self.description_attribute_functions.items():
                 try:
-                    func = getattr(mud,"get_"+func_name)
-                    setattr(self,attr,func(fh))
+                    func = getattr(mud, "get_"+func_name)
+                    setattr(self, attr, func(fh))
                 except RuntimeError:
                     pass
             
             # Read histograms
-            self._read_mdict(fh=fh,
-                             get_n=mud.get_hists,
-                             attr_dict=self.histogram_attribute_functions,
-                             attr_name='hist',
+            self._read_mdict(fh=fh, 
+                             get_n=mud.get_hists, 
+                             attr_dict=self.histogram_attribute_functions, 
+                             attr_name='hist', 
                              obj_class=mhist
                              )
             
             # Read scalers
-            self._read_mdict(fh=fh,
-                             get_n=mud.get_scalers,
-                             attr_dict=self.scaler_attribute_functions,
-                             attr_name='sclr',
+            self._read_mdict(fh=fh, 
+                             get_n=mud.get_scalers, 
+                             attr_dict=self.scaler_attribute_functions, 
+                             attr_name='sclr', 
                              obj_class=mscaler
                              )
             
             # Read independent variables
-            self._read_mdict(fh=fh,
-                             get_n=mud.get_ivars,
-                             attr_dict=self.variable_attribute_functions,
-                             attr_name='ivar',
+            self._read_mdict(fh=fh, 
+                             get_n=mud.get_ivars, 
+                             attr_dict=self.variable_attribute_functions, 
+                             attr_name='ivar', 
                              obj_class=mvar
                              )
            
             # Read comments
-            self._read_mdict(fh=fh,
-                             get_n=mud.get_comments,
-                             attr_dict=self.comment_attribute_functions,
-                             attr_name='comments',
+            self._read_mdict(fh=fh, 
+                             get_n=mud.get_comments, 
+                             attr_dict=self.comment_attribute_functions, 
+                             attr_name='comments', 
                              obj_class=mcomment
                              )
             
@@ -303,7 +303,7 @@ class mdata(object):
             pass
         
     # ======================================================================= #
-    def _read_mdict(self,fh,get_n,attr_dict,attr_name,obj_class):
+    def _read_mdict(self, fh, get_n, attr_dict, attr_name, obj_class):
         """
             Read all of a type of objects from MUD file and set its attributes, 
             place in mdict. 
@@ -319,22 +319,22 @@ class mdata(object):
         except RuntimeError:
             pass
         else:
-            setattr(self,attr_name,mdict())
-            for i in range(1,n+1):
+            setattr(self, attr_name, mdict())
+            for i in range(1, n+1):
                 
                 obj = obj_class()
                 obj.id_number = i
                 
-                for attr,func_name in attr_dict.items():
-                    func = getattr(mud,'get_'+func_name)
+                for attr, func_name in attr_dict.items():
+                    func = getattr(mud, 'get_'+func_name)
                     try:
-                        setattr(obj,attr,func(fh,i))
+                        setattr(obj, attr, func(fh, i))
                     except RuntimeError:
                         pass
-                getattr(self,attr_name)[obj.title] = obj
+                getattr(self, attr_name)[obj.title] = obj
         
     # ======================================================================= #   
-    def _write_mdict(self,fh,set_n,attr_dict,attr_name,typeid):
+    def _write_mdict(self, fh, set_n, attr_dict, attr_name, typeid):
         """
             Read all of a type of objects from MUD file and set its attributes, 
             place in mdict. 
@@ -348,7 +348,7 @@ class mdata(object):
         
         # get mdict object 
         try:
-            obj_dict = getattr(self,attr_name)
+            obj_dict = getattr(self, attr_name)
         except AttributeError:
             return 
             
@@ -357,29 +357,29 @@ class mdata(object):
         n = len(keys)
         
         # set type and number of elements
-        set_n(fh,typeid,n)
+        set_n(fh, typeid, n)
         
         # get set functions
-        set_fn = {k:getattr(mud,'set_'+link) for k,link in attr_dict.items()}
+        set_fn = {k:getattr(mud, 'set_'+link) for k, link in attr_dict.items()}
         
         # set each item
-        for i,key in enumerate(keys):
+        for i, key in enumerate(keys):
                 
             # get the object
             obj = obj_dict[key]
             
             # set initial
             if attr_name == 'hist':
-                set_fn['htype'](fh, i+1, getattr(obj,'htype'))
+                set_fn['htype'](fh, i+1, getattr(obj, 'htype'))
             
             # iterate over attributes
             for k in attr_dict.keys():
                 
-                if k in ('n_bytes','htype','s_per_bin'):
+                if k in ('n_bytes', 'htype', 's_per_bin'):
                     continue
                 
                 try:
-                    set_fn[k](fh, i+1, getattr(obj,k))
+                    set_fn[k](fh, i+1, getattr(obj, k))
                 except AttributeError:
                     pass
     
@@ -397,15 +397,15 @@ class mdata(object):
             raise RuntimeError('Mode must be one of "TD" or "TI"')
         
     # ======================================================================= #   
-    def write(self,filename):
+    def write(self, filename):
         """
             Write object to MUD file. 
         """
         
         # check that all needed attributes are set
         for attr in self.default_attributes:
-            if hasattr(self,attr):
-                at = getattr(self,attr)
+            if hasattr(self, attr):
+                at = getattr(self, attr)
                 if at is None:
                     del at
     
@@ -428,48 +428,48 @@ class mdata(object):
         # Write file body -----------------------------------------------------
         try:
             # write the run description 
-            mud.set_description(fh,method['descr'])
+            mud.set_description(fh, method['descr'])
             
-            for attr,func_name in self.description_attribute_functions.items():
+            for attr, func_name in self.description_attribute_functions.items():
                 
                 # get the attribute
-                if hasattr(self,attr):
-                    val = getattr(self,attr)
+                if hasattr(self, attr):
+                    val = getattr(self, attr)
                     
                     # write 
                     if val is not None:
-                        func = getattr(mud,"set_"+func_name)
-                        func(fh,val)
+                        func = getattr(mud, "set_"+func_name)
+                        func(fh, val)
                 
             # histograms
-            self._write_mdict(fh=fh,
-                             set_n=mud.set_hists,
-                             attr_dict=self.histogram_attribute_functions,
-                             attr_name='hist',
+            self._write_mdict(fh=fh, 
+                             set_n=mud.set_hists, 
+                             attr_dict=self.histogram_attribute_functions, 
+                             attr_name='hist', 
                              typeid=method['hist']
                              )
             
             # scalers
-            self._write_mdict(fh=fh,
-                             set_n=mud.set_scalers,
-                             attr_dict=self.scaler_attribute_functions,
-                             attr_name='sclr',
+            self._write_mdict(fh=fh, 
+                             set_n=mud.set_scalers, 
+                             attr_dict=self.scaler_attribute_functions, 
+                             attr_name='sclr', 
                              typeid=method['sclr']
                              )
             
             # independent variables
-            self._write_mdict(fh=fh,
-                             set_n=mud.set_ivars,
-                             attr_dict=self.variable_attribute_functions,
-                             attr_name='ivar',
+            self._write_mdict(fh=fh, 
+                             set_n=mud.set_ivars, 
+                             attr_dict=self.variable_attribute_functions, 
+                             attr_name='ivar', 
                              typeid=method['ivar']
                              )
            
             # comments
-            self._write_mdict(fh=fh,
-                             set_n=mud.set_comments,
-                             attr_dict=self.comment_attribute_functions,
-                             attr_name='comments',
+            self._write_mdict(fh=fh, 
+                             set_n=mud.set_comments, 
+                             attr_dict=self.comment_attribute_functions, 
+                             attr_name='comments', 
                              typeid=method['comments']
                              )
             

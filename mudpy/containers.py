@@ -32,7 +32,7 @@ class mcontainer(object):
     def __mul__(self, other):       return self._get_val()*self._get_oval(other)
     def __neg__(self):              return -self._get_val()
     def __pos__(self):              return +self._get_val()
-    def __pow__(self, other):       return np.pow(self._get_val(), self._get_oval(other))
+    def __pow__(self, other):       return np.power(self._get_val(), self._get_oval(other))
     def __round__(self):            return np.round(self._get_val())
     def __rshift__(self, other):    return self._get_val()>>self._get_oval(other)
     def __sub__(self, other):       return self._get_val()-self._get_oval(other)

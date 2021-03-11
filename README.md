@@ -68,7 +68,7 @@ If the above does not work, try using `pip3` or `python3 -m pip` instead.
 * [`containers.mdict`](https://github.com/dfujim/mudpy/wiki/containers.mdict) [object]: enhanced dictionary class for sub-level lookup and attribute access
 * [`containers.mcomment`](https://github.com/dfujim/mudpy/wiki/containers.mcomment) [object]: special container for comments
 * [`containers.mhist`](https://github.com/dfujim/mudpy/wiki/containers.mhist) [object]: special container for histograms
-* * [`containers.mscaler`](https://github.com/dfujim/mudpy/wiki/containers.mscaler) [object]: special container for scalers
+* [`containers.mscaler`](https://github.com/dfujim/mudpy/wiki/containers.mscaler) [object]: special container for scalers
 * [`containers.mlist`](https://github.com/dfujim/mudpy/wiki/containers.mlist) [object]: enhanced list class for sub-level lookup
 * [`containers.mvar`](https://github.com/dfujim/mudpy/wiki/containers.mvar) [object]: special container for variables
 

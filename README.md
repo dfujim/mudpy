@@ -21,8 +21,8 @@ A key goal of the project is to alleviate much of the technical tedium that is o
 
 [mudpy] has been written to fullfill the following needs: 
 
-* Provide an intuitive means of interfacing with [MUD] files in [Python].
-* Provide low-level wrappers of the `mud_friendly` API. 
+* Provide a pythonic means of interfacing with [MUD] files in [Python].
+* Provide low-level wrappers of the [`mud_friendly`] API. 
 
 ## Citing
 
@@ -62,7 +62,7 @@ If the above does not work, try using `pip3` or `python3 -m pip` instead.
 
 ## [Contents](https://github.com/dfujim/mudpy/wiki)
 
-* [`mud_friendly`](https://github.com/dfujim/mudpy/wiki/mud_friendly) [C wrapper]: python access to [MUD] C functions
+* [`mud_friendly`] [C wrapper]: python access to [MUD] C functions
 * [`mdata`](https://github.com/dfujim/mudpy/wiki/mdata) [object]: access general [MUD] files pythonically
 * [`containers.mcontainer`](https://github.com/dfujim/mudpy/wiki/containers.mcontainer) [object]: special container base class
 * [`containers.mdict`](https://github.com/dfujim/mudpy/wiki/containers.mdict) [object]: enhanced dictionary class for sub-level lookup and attribute access
@@ -99,3 +99,5 @@ If the above does not work, try using `pip3` or `python3 -m pip` instead.
 [mudpy]: https://github.com/dfujim/mudpy
 [bdata]: https://github.com/dfujim/bdata
 [bfit]: https://github.com/dfujim/bfit
+
+[`mud_friendly`]: https://github.com/dfujim/mudpy/wiki/mud_friendly

@@ -1,6 +1,6 @@
 # mudpy
 
-<a href="https://pypi.org/project/bdata/" alt="PyPI Version"><img src="https://img.shields.io/pypi/v/mud-py?label=PyPI%20Version"/></a>
+<a href="https://pypi.org/project/mud-py/" alt="PyPI Version"><img src="https://img.shields.io/pypi/v/mud-py?label=PyPI%20Version"/></a>
 <img src="https://img.shields.io/pypi/format/mud-py?label=PyPI%20Format"/>
 <img src="https://img.shields.io/github/languages/code-size/dfujim/mudpy"/>
 <img src="https://img.shields.io/tokei/lines/github/dfujim/mudpy"/>

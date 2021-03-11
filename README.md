@@ -1,13 +1,13 @@
 # mudpy
 
-<a href="https://pypi.org/project/bdata/" alt="PyPI Version"><img src="https://img.shields.io/pypi/v/bdata?label=PyPI%20Version"/></a>
-<img src="https://img.shields.io/pypi/format/bdata?label=PyPI%20Format"/>
-<img src="https://img.shields.io/github/languages/code-size/dfujim/bdata"/>
-<img src="https://img.shields.io/tokei/lines/github/dfujim/bdata"/>
-<img src="https://img.shields.io/pypi/l/bdata"/>
+<a href="https://pypi.org/project/bdata/" alt="PyPI Version"><img src="https://img.shields.io/pypi/v/mud-py?label=PyPI%20Version"/></a>
+<img src="https://img.shields.io/pypi/format/mud-py?label=PyPI%20Format"/>
+<img src="https://img.shields.io/github/languages/code-size/dfujim/mudpy"/>
+<img src="https://img.shields.io/tokei/lines/github/dfujim/mudpy"/>
+<img src="https://img.shields.io/pypi/l/mud-py"/>
 
-<a href="https://github.com/dfujim/bdata/commits/master" alt="Commits"><img src="https://img.shields.io/github/commits-since/dfujim/bdata/latest/master"/></a>
-<a href="https://github.com/dfujim/bdata/commits/master" alt="Commits"><img src="https://img.shields.io/github/last-commit/dfujim/bdata"/></a>
+<a href="https://github.com/dfujim/mudpy/commits/master" alt="Commits"><img src="https://img.shields.io/github/commits-since/dfujim/mudpy/latest/master"/></a>
+<a href="https://github.com/dfujim/mudpy/commits/master" alt="Commits"><img src="https://img.shields.io/github/last-commit/dfujim/mudpy"/></a>
 
 MUon (MUD) Data file IO package.
 

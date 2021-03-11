@@ -1,4 +1,5 @@
 from .mcontainer import mcontainer
+import numpy as np
 
 class mhist(mcontainer):
     """
@@ -25,6 +26,39 @@ class mhist(mcontainer):
     __slots__ = ('id_number', 'htype', 'title', 'data', 'n_bytes', 'n_bins',
                  'n_events', 'fs_per_bin', 's_per_bin', 't0_ps', 't0_bin',
                  'good_bin1', 'good_bin2', 'background1', 'background2')
+
+    def __init__(self, 
+                id_number   = -1, 
+                htype       = -1, 
+                title       = '', 
+                data        = None, 
+                n_bytes     = -1, 
+                n_bins      = 0,
+                n_events    = 0, 
+                fs_per_bin  = -1, 
+                s_per_bin   = np.nan, 
+                t0_ps       = np.nan, 
+                t0_bin      = np.nan,
+                good_bin1   = -1, 
+                good_bin2   = -1, 
+                background1 = -1, 
+                background2 = -1):
+                    
+        self.id_number = id_number
+        self.htype = htype
+        self.title = title
+        self.data = data
+        self.n_bytes = n_bytes
+        self.n_bins = n_bins
+        self.n_events = n_events
+        self.fs_per_bin = fs_per_bin
+        self.s_per_bin = s_per_bin
+        self.t0_ps = t0_ps
+        self.t0_bin = t0_bin
+        self.good_bin1 = good_bin1
+        self.good_bin2 = good_bin2
+        self.background1 = background1
+        self.background2 = background2
 
     def _get_val(self):                 return self.data
 

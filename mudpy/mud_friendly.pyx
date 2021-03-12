@@ -163,6 +163,10 @@ import array
 ### ======================================================================= ###
 # CONSTANTS
 ### ======================================================================= ###
+character_encoding = "latin1"
+DEF TITLE_CHAR_SIZE = 256
+DEF COMMENT_CHAR_SIZE = 8192
+
 cdef extern from "../mud_src/mud.h":
     
     # Lab identifiers
@@ -271,7 +275,7 @@ cdef extern from "../mud_src/mud_friendly.c":
 cpdef open_read(str file_name):
     """Open file for reading. Returns file handle."""
     cdef unsigned int file_type = 0
-    cdef int fh = MUD_openRead(file_name.encode('latin1'), &file_type)
+    cdef int fh = MUD_openRead(file_name.encode(character_encoding), &file_type)
     
     if fh < 0:  raise RuntimeError('MUD_openRead failed.')
     return <int>fh
@@ -300,7 +304,7 @@ cpdef open_write(str file_name, unsigned int file_type):
                             FMT_TRI_TI_ID (I-MuSR)                           
         Returns file handle.
     """
-    cdef int fh = MUD_openWrite(file_name.encode('latin1'),file_type)
+    cdef int fh = MUD_openWrite(file_name.encode(character_encoding),file_type)
     if fh < 0:  raise RuntimeError('MUD_openWrite failed.')
     return <int>fh
     
@@ -311,7 +315,7 @@ cpdef open_readwrite(str file_name):
         Returns file handle.
     """
     cdef unsigned int file_type = 0
-    cdef int fh = MUD_openReadWrite(file_name.encode('latin1'), &file_type)
+    cdef int fh = MUD_openReadWrite(file_name.encode(character_encoding), &file_type)
     if fh < 0:  raise RuntimeError('MUD_openWrite failed.')
     return <int>fh
     
@@ -321,7 +325,7 @@ cpdef close_write(int file_handle):
     
 cpdef close_writefile(int file_handle, str file_name):
     """Writes changes to a new file and close both"""
-    MUD_closeWriteFile(file_handle, file_name.encode('latin1'))
+    MUD_closeWriteFile(file_handle, file_name.encode(character_encoding))
     
 
 ### ======================================================================= ###
@@ -391,88 +395,88 @@ cpdef get_end_time(int file_handle):
     return <int>time
     
 cpdef get_title(int file_handle):
-    """Returns python string. Max number of characters: 256."""
-    cdef char title[256]
-    if not MUD_getTitle(file_handle, title,256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE."""
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getTitle(file_handle, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getTitle failed.')
-    return <object>(title.decode('latin1'))
+    return <object>(title.decode(character_encoding))
     
 cpdef get_lab(int file_handle):
-    """Returns python string. Max number of characters: 256."""
-    cdef char title[256]
-    if not MUD_getLab(file_handle, title,256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE."""
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getLab(file_handle, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getLab failed.')
-    return <object>(title.decode('latin1'))
+    return <object>(title.decode(character_encoding))
  
 cpdef get_area(int file_handle):
-    """Returns python string. Max number of characters: 256."""
-    cdef char title[256]
-    if not MUD_getArea(file_handle, title,256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE."""
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getArea(file_handle, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getArea failed.')
-    return <object>(title.decode('latin1'))
+    return <object>(title.decode(character_encoding))
     
 cpdef get_method(int file_handle):
-    """Returns python string. Max number of characters: 256."""
-    cdef char title[256]
-    if not MUD_getMethod(file_handle, title,256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE."""
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getMethod(file_handle, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getMethod failed.')
-    return <object>(title.decode('latin1'))
+    return <object>(title.decode(character_encoding))
     
 cpdef get_apparatus(int file_handle):
-    """Returns python string. Max number of characters: 256."""
-    cdef char title[256]
-    if not MUD_getApparatus(file_handle, title,256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE."""
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getApparatus(file_handle, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getApparatus failed.')
-    return <object>(title.decode('latin1'))
+    return <object>(title.decode(character_encoding))
     
 cpdef get_insert(int file_handle):
-    """Returns python string. Max number of characters: 256."""
-    cdef char title[256]
-    if not MUD_getInsert(file_handle, title,256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE."""
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getInsert(file_handle, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getInsert failed.')
-    return <object>(title.decode('latin1'))
+    return <object>(title.decode(character_encoding))
 
 cpdef get_sample(int file_handle):
-    """Returns python string. Max number of characters: 256."""
-    cdef char title[256]
-    if not MUD_getSample(file_handle, title,256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE."""
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getSample(file_handle, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getSample failed.')
-    return <object>(title.decode('latin1'))
+    return <object>(title.decode(character_encoding))
     
 cpdef get_orientation(int file_handle):
-    """Returns python string. Max number of characters: 256."""
-    cdef char title[256]
-    if not MUD_getOrient(file_handle, title,256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE."""
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getOrient(file_handle, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getOrient failed.')
-    return <object>(title.decode('latin1'))
+    return <object>(title.decode(character_encoding))
 
 cpdef get_das(int file_handle):
-    """Returns python string. Max number of characters: 256."""
-    cdef char title[256]
-    if not MUD_getDas(file_handle, title,256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE."""
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getDas(file_handle, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getDas failed.')
-    return <object>(title.decode('latin1'))
+    return <object>(title.decode(character_encoding))
 
 cpdef get_experimenter(int file_handle):
-    """Returns python string. Max number of characters: 256. """
-    cdef char title[256]
-    if not MUD_getExperimenter(file_handle, title,256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE. """
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getExperimenter(file_handle, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getExperimenter failed.')
-    return <object>(title.decode('latin1'))
+    return <object>(title.decode(character_encoding))
 
 cpdef get_temperature(int file_handle):
-    """Returns python string. Max number of characters: 256. """
-    cdef char title[256]
-    if not MUD_getTemperature(file_handle, title,256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE. """
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getTemperature(file_handle, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getTemperature failed.')
-    return <object>(title.decode('latin1'))
+    return <object>(title.decode(character_encoding))
 
 cpdef get_field(int file_handle):
-    """Returns python string. Max number of characters: 256. """
-    cdef char title[256]
-    if not MUD_getField(file_handle, title,256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE. """
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getField(file_handle, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getField failed.')
-    return <object>(title.decode('latin1'))
+    return <object>(title.decode(character_encoding))
 
 ### ======================================================================= ###
 # WRITE RUN DESCRIPTION
@@ -541,61 +545,61 @@ cpdef set_end_time(int file_handle, unsigned int timeEnd):
     
 cpdef set_title(int file_handle, str title):
     """title: string"""
-    if not MUD_setTitle(file_handle, title.encode('latin1')):
+    if not MUD_setTitle(file_handle, title.encode(character_encoding)):
         raise RuntimeError('MUD_setTitle failed.')
     return
     
 cpdef set_lab(int file_handle, str title):
     """title: string"""
-    if not MUD_setLab(file_handle, title.encode('latin1')):
+    if not MUD_setLab(file_handle, title.encode(character_encoding)):
         raise RuntimeError('MUD_setLab failed.')
     return
  
 cpdef set_area(int file_handle, str title):
     """title: string"""
-    if not MUD_setArea(file_handle, title.encode('latin1')):
+    if not MUD_setArea(file_handle, title.encode(character_encoding)):
         raise RuntimeError('MUD_setArea failed.')
     return
  
 cpdef set_method(int file_handle, str title):
     """title: string"""
-    if not MUD_setMethod(file_handle, title.encode('latin1')):
+    if not MUD_setMethod(file_handle, title.encode(character_encoding)):
         raise RuntimeError('MUD_setMethod failed.')
     return
  
 cpdef set_apparatus(int file_handle, str title):
     """title: string"""
-    if not MUD_setApparatus(file_handle, title.encode('latin1')):
+    if not MUD_setApparatus(file_handle, title.encode(character_encoding)):
         raise RuntimeError('MUD_setApparatus failed.')
     return
  
 cpdef set_insert(int file_handle, str title):
     """title: string"""
-    if not MUD_setInsert(file_handle, title.encode('latin1')):
+    if not MUD_setInsert(file_handle, title.encode(character_encoding)):
         raise RuntimeError('MUD_setInsert failed.')
     return
  
 cpdef set_sample(int file_handle, str title):
     """title: string"""
-    if not MUD_setSample(file_handle, title.encode('latin1')):
+    if not MUD_setSample(file_handle, title.encode(character_encoding)):
         raise RuntimeError('MUD_setSample failed.')
     return
 
 cpdef set_orientation(int file_handle, str title):
     """title: string"""
-    if not MUD_setOrient(file_handle, title.encode('latin1')):
+    if not MUD_setOrient(file_handle, title.encode(character_encoding)):
         raise RuntimeError('MUD_setOrient failed.')
     return
  
 cpdef set_das(int file_handle, str title):
     """title: string"""
-    if not MUD_setDas(file_handle, title.encode('latin1')):
+    if not MUD_setDas(file_handle, title.encode(character_encoding)):
         raise RuntimeError('MUD_setDas failed.')
     return
  
 cpdef set_experimenter(int file_handle, str title):
     """title: string"""
-    if not MUD_setExperimenter(file_handle, title.encode('latin1')):
+    if not MUD_setExperimenter(file_handle, title.encode(character_encoding)):
         raise RuntimeError('MUD_setExperimenter failed.')
     return
  
@@ -604,7 +608,7 @@ cpdef set_temperature(int file_handle, str title):
         Not in I-MuSR
         title: string
     """
-    if not MUD_setTemperature(file_handle, title.encode('latin1')):
+    if not MUD_setTemperature(file_handle, title.encode(character_encoding)):
         raise RuntimeError('MUD_setTemperature failed.')
     return
  
@@ -613,7 +617,7 @@ cpdef set_field(int file_handle, str title):
         Not in I-MuSR
         title: string
     """
-    if not MUD_setField(file_handle, title.encode('latin1')):
+    if not MUD_setField(file_handle, title.encode(character_encoding)):
         raise RuntimeError('MUD_setField failed.')
     return
            
@@ -659,25 +663,25 @@ cpdef get_comment_time(int file_handle, int id_number):
     return value
 
 cpdef get_comment_author(int file_handle, int id_number):
-    """Returns python string. Max number of characters: 256."""
-    cdef char title[256]
-    if not MUD_getCommentAuthor(file_handle, id_number, title, 256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE."""
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getCommentAuthor(file_handle, id_number, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getCommentAuthor failed.')
-    return <object>(title.decode('latin1'))
+    return <object>(title.decode(character_encoding))
 
 cpdef get_comment_title(int file_handle, int id_number):
-    """Returns python string. Max number of characters: 256."""
-    cdef char title[256]
-    if not MUD_getCommentTitle(file_handle, id_number, title, 256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE."""
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getCommentTitle(file_handle, id_number, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getCommentTitle failed.')
-    return <object>(title.decode('latin1'))
+    return <object>(title.decode(character_encoding))
     
 cpdef get_comment_body(int file_handle, int id_number):
-    """Returns python string. Max number of characters: 8192."""
-    cdef char title[8192]
-    if not MUD_getCommentBody(file_handle, id_number, title, 8192):
+    """Returns python string. Max number of characters: COMMENT_CHAR_SIZE."""
+    cdef char title[COMMENT_CHAR_SIZE]
+    if not MUD_getCommentBody(file_handle, id_number, title, COMMENT_CHAR_SIZE):
         raise RuntimeError('MUD_getCommentBody failed.')
-    return <object>(title.decode('latin1'))
+    return <object>(title.decode(character_encoding))
         
 ### ======================================================================= ###
 # WRITE COMMENTS
@@ -722,19 +726,19 @@ cpdef set_comment_time(int file_handle, int id_number, unsigned int value):
 
 cpdef set_comment_author(int file_handle, int id_number, str title):
     """Set string"""
-    if not MUD_setCommentAuthor(file_handle, id_number, title.encode('latin1')):
+    if not MUD_setCommentAuthor(file_handle, id_number, title.encode(character_encoding)):
         raise RuntimeError('MUD_setCommentAuthor failed.')
     return 
 
 cpdef set_comment_title(int file_handle, int id_number, str title):
     """Set string"""
-    if not MUD_setCommentTitle(file_handle, id_number, title.encode('latin1')):
+    if not MUD_setCommentTitle(file_handle, id_number, title.encode(character_encoding)):
         raise RuntimeError('MUD_setCommentTitle failed.')
     return 
 
 cpdef set_comment_body(int file_handle, int id_number, str title):
     """Set string"""
-    if not MUD_setCommentBody(file_handle, id_number, title.encode('latin1')):
+    if not MUD_setCommentBody(file_handle, id_number, title.encode(character_encoding)):
         raise RuntimeError('MUD_setCommentBody failed.')
     return 
 
@@ -855,11 +859,11 @@ cpdef get_hist_n_events(int file_handle, int id_number):
     return value    
     
 cpdef get_hist_title(int file_handle, int id_number):
-    """Returns python string. Max number of characters: 256."""
-    cdef char title[256]
-    if not MUD_getHistTitle(file_handle, id_number, title,256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE."""
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getHistTitle(file_handle, id_number, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getHistTitle failed.')
-    return <object>(title.decode('latin1'))
+    return <object>(title.decode(character_encoding))
     
 cpdef get_hist_sec_per_bin(int file_handle, int id_number):
     """Returns float."""
@@ -989,7 +993,7 @@ cpdef set_hist_n_events(int file_handle, int id_number, unsigned int value):
     return
     
 cpdef set_hist_title(int file_handle, int id_number, str title):
-    if not MUD_setHistTitle(file_handle, id_number, title.encode('latin1')):
+    if not MUD_setHistTitle(file_handle, id_number, title.encode(character_encoding)):
         raise RuntimeError('MUD_setHistTitle failed.')
     return
     
@@ -1039,9 +1043,9 @@ cpdef get_scalers(int file_handle):
     return np.array([<int>pType,<int>number_of_scalars])
     
 cpdef get_scaler_label(int file_handle, int id_number):
-    """Returns python string. Max number of characters: 256."""
-    cdef char title[256]
-    if not MUD_getScalerLabel(file_handle,id_number, title,256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE."""
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getScalerLabel(file_handle,id_number, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getScalerLabel failed.')
     return <object>(title.decode('Latin-1'))
     
@@ -1077,7 +1081,7 @@ cpdef set_scalers(int file_handle, unsigned int pType, unsigned int number_scala
     return
     
 cpdef set_scaler_label(int file_handle, int id_number, str title):
-    if not MUD_setScalerLabel(file_handle, id_number, title.encode('latin1')):
+    if not MUD_setScalerLabel(file_handle, id_number, title.encode(character_encoding)):
         raise RuntimeError('MUD_setScalerLabel failed.')
     return
     
@@ -1160,25 +1164,25 @@ cpdef get_ivar_skewness(int file_handle, int id_number):
     return <double>value
 
 cpdef get_ivar_name(int file_handle, int id_number):
-    """Returns python string. Max number of characters: 256."""
-    cdef char title[256]
-    if not MUD_getIndVarName(file_handle, id_number, title,256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE."""
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getIndVarName(file_handle, id_number, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getIndVarName failed.')
-    return <object>(title.decode('latin1'))
+    return <object>(title.decode(character_encoding))
 
 cpdef get_ivar_description(int file_handle, int id_number):
-    """Returns python string. Max number of characters: 256."""
-    cdef char title[256]
-    if not MUD_getIndVarDescription(file_handle, id_number, title,256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE."""
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getIndVarDescription(file_handle, id_number, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getIndVarDescription failed.')
-    return <object>(title.decode('latin1')) 
+    return <object>(title.decode(character_encoding)) 
     
 cpdef get_ivar_units(int file_handle, int id_number):
-    """Returns python string. Max number of characters: 256."""
-    cdef char title[256]
-    if not MUD_getIndVarUnits(file_handle, id_number, title,256):
+    """Returns python string. Max number of characters: TITLE_CHAR_SIZE."""
+    cdef char title[TITLE_CHAR_SIZE]
+    if not MUD_getIndVarUnits(file_handle, id_number, title, TITLE_CHAR_SIZE):
         raise RuntimeError('MUD_getIndVarUnits failed.')
-    return <object>(title.decode('latin1'))
+    return <object>(title.decode(character_encoding))
 
 cpdef get_ivar_n_data(int file_handle, int id_number):
     """Returns number of history data points """ 
@@ -1286,17 +1290,17 @@ cpdef set_ivar_skewness(int file_handle, int id_number, double value):
     return 
 
 cpdef set_ivar_name(int file_handle, int id_number, str title):
-    if not MUD_setIndVarName(file_handle, id_number, title.encode('latin1')):
+    if not MUD_setIndVarName(file_handle, id_number, title.encode(character_encoding)):
         raise RuntimeError('MUD_setIndVarName failed.')
     return
 
 cpdef set_ivar_description(int file_handle, int id_number, str title):
-    if not MUD_setIndVarDescription(file_handle, id_number, title.encode('latin1')):
+    if not MUD_setIndVarDescription(file_handle, id_number, title.encode(character_encoding)):
         raise RuntimeError('MUD_setIndVarDescription failed.')
     return
     
 cpdef set_ivar_units(int file_handle, int id_number, str title):
-    if not MUD_setIndVarUnits(file_handle, id_number, title.encode('latin1')):
+    if not MUD_setIndVarUnits(file_handle, id_number, title.encode(character_encoding)):
         raise RuntimeError('MUD_setIndVarUnits failed.')
     return
     

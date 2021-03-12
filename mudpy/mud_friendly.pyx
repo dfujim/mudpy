@@ -165,6 +165,7 @@ import array
 ### ======================================================================= ###
 character_encoding = "latin1"
 DEF TITLE_CHAR_SIZE = 256
+DEF COMMENT_CHAR_SIZE = 8192
 
 cdef extern from "../mud_src/mud.h":
     
@@ -676,9 +677,9 @@ cpdef get_comment_title(int file_handle, int id_number):
     return <object>(title.decode(character_encoding))
     
 cpdef get_comment_body(int file_handle, int id_number):
-    """Returns python string. Max number of characters: 8192."""
-    cdef char title[8192]
-    if not MUD_getCommentBody(file_handle, id_number, title, 8192):
+    """Returns python string. Max number of characters: COMMENT_CHAR_SIZE."""
+    cdef char title[COMMENT_CHAR_SIZE]
+    if not MUD_getCommentBody(file_handle, id_number, title, COMMENT_CHAR_SIZE):
         raise RuntimeError('MUD_getCommentBody failed.')
     return <object>(title.decode(character_encoding))
         

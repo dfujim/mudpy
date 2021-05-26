@@ -485,12 +485,4 @@ class mdata(object):
         # Close file and write ------------------------------------------------
         else:
             mud.close_write(fh)
-                
-                
 
-def cycler():
-    lst = ('hist', 'ivar', 'sclr')
-    i = 0
-    while True:
-        yield i
-        i = (i+1)%3

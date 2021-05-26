@@ -185,21 +185,25 @@ class mdata(object):
     # ======================================================================= #
     def __getattr__(self, name):
         
-        try:
-            # fetch from top level
+        if name in ('hist', 'ivar', 'sclr'):
             return getattr(object, name)
-        except AttributeError as err:
-            
-            # fetching of second level
-            if hasattr(self, 'hist'):
-                return getattr(self.hist, name)
-            if hasattr(self, 'ivar'): 
-                return getattr(self.ivar, name)
-            if hasattr(self, 'sclr'): 
-                return getattr(self.sclr, name)
-                    
-            # nothing worked - raise error
-            raise AttributeError(err) from None
+        
+        else:
+            try:
+                # fetch from top level
+                return getattr(object, name)
+            except AttributeError as err:
+                
+                # fetching of second level
+                if hasattr(self, 'hist') and hasattr(self.hist, name):
+                    return getattr(self.hist, name)
+                if hasattr(self, 'ivar') and hasattr(self.ivar, name): 
+                    return getattr(self.ivar, name)
+                if hasattr(self, 'sclr') and hasattr(self.sclr, name): 
+                    return getattr(self.sclr, name)
+                        
+                # nothing worked - raise error
+                raise AttributeError(err) from None
                         
     # ======================================================================= #
     def __repr__(self):
@@ -300,7 +304,7 @@ class mdata(object):
         try:
             self.end_date = time.ctime(self.end_time)
         except AttributeError:
-            pass
+            pass      
         
     # ======================================================================= #
     def _read_mdict(self, fh, get_n, attr_dict, attr_name, obj_class):
@@ -483,3 +487,10 @@ class mdata(object):
             mud.close_write(fh)
                 
                 
+
+def cycler():
+    lst = ('hist', 'ivar', 'sclr')
+    i = 0
+    while True:
+        yield i
+        i = (i+1)%3

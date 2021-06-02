@@ -36,6 +36,7 @@ class mcontainer(object):
     def __truediv__(self, other):   return self._get_val()/self._get_oval(other)
 
     # casting operators
+    def __bool__(self):             return bool(self._get_val())
     def __complex__(self):          return complex(self._get_val())
     def __int__(self):              return int(self._get_val())
     def __float__(self):            return float(self._get_val())

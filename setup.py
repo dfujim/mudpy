@@ -3,9 +3,9 @@ from distutils.core import Extension
 from Cython.Build import cythonize
 import numpy
 
-with open("README.md", "r") as fh:
+with open("README.md", "r", encoding="utf8") as fh:
     long_description = fh.read()
-
+    
 # module extension
 ext = Extension("mudpy.mud_friendly",
                 sources=["./mudpy/mud_friendly.pyx",
@@ -21,7 +21,7 @@ ext = Extension("mudpy.mud_friendly",
 
 setuptools.setup(
     name="mud-py",
-    version="1.2.2",
+    version="1.2.3",
     author="Derek Fujimoto",
     author_email="fujimoto@phas.ubc.ca",
     description="MUon Data file reader",

@@ -249,6 +249,7 @@ class mdata(object):
             fh = mud.open_read(filename)
         except RuntimeError:
             raise RuntimeError("Open file %s failed. " % filename) from None
+       
         try:
             # Read run description
             for attr, func_name in self.description_attribute_functions.items():

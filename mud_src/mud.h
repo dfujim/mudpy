@@ -27,12 +27,15 @@
  * 14-Aug-2019   DJA  Use stdint.h, casts in printf
  */
 
+#ifdef _WIN32 || WIN32
+#define __MSDOS__
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-#ifdef __CINT__
+
 typedef char* caddr_t;
-#endif /* __CINT __ */
 
 /*
  *  FORMAT IDs - Must be unique!

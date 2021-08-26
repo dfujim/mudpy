@@ -167,7 +167,7 @@ character_encoding = "latin1"
 DEF TITLE_CHAR_SIZE = 256
 DEF COMMENT_CHAR_SIZE = 8192
 
-cdef extern from "../mud_src/mud.h":
+cdef extern from 'mud.h':
     
     # Lab identifiers
     cdef int MUD_LAB_ALL_ID
@@ -211,8 +211,8 @@ cdef extern from "../mud_src/mud.h":
     cdef int MUD_SEC_TRI_TI_RUN_DESC_ID
     cdef int MUD_SEC_TRI_TI_HIST_ID
     cdef int MUD_GRP_TRI_TI_HIST_ID
-    
-    # RAL format identifiers
+
+# RAL format identifiers
 #~     cdef int MUD_SEC_RAL_RUN_DESC_ID
 #~     cdef int MUD_SEC_RAL_HIST_ID
 #~     cdef int MUD_GRP_RAL_HIST_ID
@@ -268,7 +268,7 @@ GRP_TRI_TI_HIST_ID = MUD_GRP_TRI_TI_HIST_ID
 ### ======================================================================= ###
 # READ FILE IO
 ### ======================================================================= ###
-cdef extern from "../mud_src/mud_friendly.c":
+cdef extern from "mud_friendly.c":
     int MUD_openRead(char* file_name, unsigned int* pType)
     void MUD_closeRead(int file_handle)
     
@@ -287,7 +287,7 @@ cpdef close_read(int file_handle):
 ### ======================================================================= ###
 # WRITE FILE IO
 ### ======================================================================= ###
-cdef extern from "../mud_src/mud_friendly.c":
+cdef extern from "mud_friendly.c":
     int MUD_openWrite(char* file_name, unsigned int pType)
     int MUD_openReadWrite(char* file_name, unsigned int* pType)
     void MUD_closeWrite(int file_handle)
@@ -331,7 +331,7 @@ cpdef close_writefile(int file_handle, str file_name):
 ### ======================================================================= ###
 # READ RUN DESCRIPTION
 ### ======================================================================= ###
-cdef extern from "../mud_src/mud_friendly.c":
+cdef extern from "mud_friendly.c":
     int MUD_getRunDesc(int fh, unsigned int* pType)
     int MUD_getExptNumber(int fh, unsigned int* pExpNumber)
     int MUD_getRunNumber(int fh, unsigned int* pRunNumber)
@@ -481,7 +481,7 @@ cpdef get_field(int file_handle):
 ### ======================================================================= ###
 # WRITE RUN DESCRIPTION
 ### ======================================================================= ###
-cdef extern from "../mud_src/mud_friendly.c":
+cdef extern from "mud_friendly.c":
     int MUD_setRunDesc(int fh, unsigned int pType)
     int MUD_setExptNumber(int fh, unsigned int pExpNumber)
     int MUD_setRunNumber(int fh, unsigned int pRunNumber)
@@ -624,7 +624,7 @@ cpdef set_field(int file_handle, str title):
 ### ======================================================================= ###
 # READ COMMENTS
 ### ======================================================================= ###
-cdef extern from "../mud_src/mud_friendly.c":
+cdef extern from "mud_friendly.c":
     int MUD_getComments(int fh, unsigned int* pType, \
                         unsigned int* n_comments)
     int MUD_getCommentPrev(int fh, int num, unsigned int* pPrev )
@@ -686,7 +686,7 @@ cpdef get_comment_body(int file_handle, int id_number):
 ### ======================================================================= ###
 # WRITE COMMENTS
 ### ======================================================================= ###
-cdef extern from "../mud_src/mud_friendly.c":
+cdef extern from "mud_friendly.c":
     int MUD_setComments(int fh, unsigned int pType, \
                         unsigned int n_comments)
     int MUD_setCommentPrev(int fh, int num, unsigned int pPrev )
@@ -745,7 +745,7 @@ cpdef set_comment_body(int file_handle, int id_number, str title):
 ### ======================================================================= ###
 # READ HISTOGRAMS
 ### ======================================================================= ###
-cdef extern from "../mud_src/mud_friendly.c":
+cdef extern from "mud_friendly.c":
     int MUD_getHists( int fh, unsigned int* pType, unsigned int* pNum )
     int MUD_getHistType( int fh, int num, unsigned int* pType )
     int MUD_getHistNumBytes( int fh, int num, unsigned int* pNumBytes )
@@ -887,7 +887,7 @@ cpdef get_hist_data_pointer(int file_handle, int id_number):
 ### ======================================================================= ###
 # WRITE HISTOGRAMS
 ### ======================================================================= ###
-cdef extern from "../mud_src/mud_friendly.c":
+cdef extern from "mud_friendly.c":
     int MUD_setHists( int fh, unsigned int pType, unsigned int numHists )
     int MUD_setHistType( int fh, int num, unsigned int pType )
     int MUD_setHistNumBytes( int fh, int num, unsigned int pNumBytes )
@@ -1029,7 +1029,7 @@ cpdef set_hist_data_pointer(int file_handle, int id_number):
 ### ======================================================================= ###
 # READ SCALARS
 ### ======================================================================= ###
-cdef extern from "../mud_src/mud_friendly.c":
+cdef extern from "mud_friendly.c":
     int MUD_getScalers( int fh, unsigned int* pType, unsigned int* pNum )
     int MUD_getScalerLabel( int fh, int num, char* label, int strdim )
     int MUD_getScalerCounts( int fh, int num, void* pCounts )
@@ -1063,7 +1063,7 @@ cpdef get_scaler_counts(int file_handle, int id_number):
 ### ======================================================================= ###
 # WRITE SCALARS
 ### ======================================================================= ###
-cdef extern from "../mud_src/mud_friendly.c":
+cdef extern from "mud_friendly.c":
     int MUD_setScalers( int fh, unsigned int pType, unsigned int pNum )
     int MUD_setScalerLabel( int fh, int num, char* label)
     int MUD_setScalerCounts( int fh, int num, unsigned int* pCounts )
@@ -1102,7 +1102,7 @@ cpdef set_scaler_counts(int file_handle, int id_number, long[:] value):
 ### ======================================================================= ###
 # READ INDEPENDENT VARIABLES
 ### ======================================================================= ###
-cdef extern from "../mud_src/mud_friendly.c":
+cdef extern from "mud_friendly.c":
     int MUD_getIndVars(int fh, unsigned int* pType, unsigned int* number_vars)
     int MUD_getIndVarLow( int fh, int num, double* pLow )
     int MUD_getIndVarHigh( int fh, int num, double* pHigh )
@@ -1233,7 +1233,7 @@ cpdef get_ivar_time_data(int file_handle, int id_number):
 ### ======================================================================= ###
 # WRITE INDEPENDENT VARIABLES
 ### ======================================================================= ###
-cdef extern from "../mud_src/mud_friendly.c":
+cdef extern from "mud_friendly.c":
     int MUD_setIndVars(int fh, unsigned int pType, unsigned int number_variables)
     int MUD_setIndVarLow( int fh, int id_number, double value )
     int MUD_setIndVarHigh( int fh, int id_number, double value )

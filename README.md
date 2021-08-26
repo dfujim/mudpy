@@ -29,7 +29,7 @@ A key goal of the project is to alleviate much of the technical tedium that is o
 If you use [mudpy] in your work, please cite:
 
 - D. Fujimoto.
-  <i>Digging into MUD with Python: mudpy, bdata, and bfit</i>.
+  <i>bfit: A Python Application For Beta-Detected NMR</i>.
   <a href="https://arxiv.org/abs/2004.10395">
   arXiv:2004.10395 [physics.data-an]</a>.
 

@@ -1,4 +1,10 @@
 import setuptools
+
+# install numpy and cython dependencies needed for the rest of the setup script
+from setuptools import dist
+dist.Distribution().fetch_build_eggs(['cython>=0.28', 'numpy>=1.19'])
+
+# normal inports
 from distutils.core import Extension
 from Cython.Build import cythonize
 import numpy, sys

@@ -1,7 +1,7 @@
 import setuptools
 from distutils.core import Extension
 from Cython.Build import cythonize
-import numpy
+import numpy, sys
 from os.path import join
 
 # get setup variables
@@ -12,6 +12,14 @@ with open(join('mudpy', 'global_variables.py')) as fid:
 __src__ = variables['__src__']
 __version__ = variables['__version__']
 
+# get needed compile arguments
+compile_flags = ['-O3']
+
+# flags needed for windows
+if sys.platform == "win32":
+    compile_flags.extend(["-D__CINT__", "-D__MSDOS__"])
+
+# get header
 with open("README.md", "r", encoding="utf8") as fh:
     long_description = fh.read()
     
@@ -25,7 +33,8 @@ ext = Extension("mudpy.mud_friendly",
                          join(__src__, "mud_tri_ti.c"),
                          join(__src__, "mud_misc.c"),
                          join(__src__, "mud_new.c")],
-                include_dirs = [__src__, numpy.get_include()])
+                include_dirs = [__src__, numpy.get_include()],
+                extra_compile_args = compile_flags)
 
 setuptools.setup(
     name = "mud-py",
@@ -50,6 +59,5 @@ setuptools.setup(
     install_requires = ['cython>=0.28', 'numpy>=1.19'],
     ext_modules = cythonize([ext], 
                             include_path = [numpy.get_include()], 
-                            compiler_directives={'language_level' : "3"}),
-)
-
+                            compiler_directives={"language_level" : "3"})
+    )

@@ -60,6 +60,7 @@ setuptools.setup(
         "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
         "Operating System :: POSIX :: Linux",
         "Operating System :: MacOS",
+        "Operating System :: Microsoft :: Windows",
         "Development Status :: 5 - Production/Stable",
     ],
     install_requires = ['cython>=0.28', 'numpy>=1.19'],

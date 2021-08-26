@@ -1,0 +1,7 @@
+*.so
+*.pyc
+build
+dist
+mud_friendly_wrapper.c
+mudpy.cpython*
+mud_py.egg-info

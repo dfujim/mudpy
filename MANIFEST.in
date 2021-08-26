@@ -1,4 +1,4 @@
 include README.md
 include mud_src/*
 include LICENSE
-include mudpy/mud_friendly.pyx
+include mudpy/mud_friendly_wrapper.pyx

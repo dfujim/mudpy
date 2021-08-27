@@ -35,7 +35,7 @@
 #include <stdarg.h>
 #endif /* NO_STDARG */
 
-/* #define DEBUG 1   /* un-comment for debug */ 
+/* #define DEBUG 1 */  /* un-comment for debug */ 
 
 FILE*
 MUD_openInput( char* inFile )

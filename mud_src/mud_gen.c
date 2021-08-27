@@ -30,7 +30,7 @@
 #include <math.h>
 #include "mud.h"
 
-/* #define DEBUG 1 /*  (un)comment for debug */  
+/* #define DEBUG 1 */ /*  (un)comment for debug */  
 #define PACK_OP 1
 #define UNPACK_OP 2
 static int pack_op;

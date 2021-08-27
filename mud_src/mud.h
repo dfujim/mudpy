@@ -4,7 +4,7 @@
  * mud.h  Declarations for MUD 
  * v1.3
  *
- *   Copyright (C) 1994-2017 TRIUMF (Vancouver, Canada)
+ *   Copyright (C) 1994-2021 TRIUMF (Vancouver, Canada)
  *
  *   Authors: T. Whidden, D. Arseneau, S. Daviel
  *   
@@ -25,14 +25,13 @@
  * 25-Nov-2009   DJA  64-bit linux
  * 25-Jun-2017   DJA  Allow use in C++ (ROOT); shared lib.
  * 14-Aug-2019   DJA  Use stdint.h, casts in printf
+ * 01-Jun-2021   DJA  Add arm64 arch as little-endian
+ * 26-Aug-2021   DJA  Declare caddr_t in all Win. 
  */
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-#ifdef __CINT__
-typedef char* caddr_t;
-#endif /* __CINT __ */
 
 /*
  *  FORMAT IDs - Must be unique!
@@ -133,25 +132,25 @@ typedef int32_t			INT32;
 typedef uint32_t		UINT32;
 typedef float			REAL32;
 typedef double			REAL64;
-#else /*no stding.h */
+#else /*no stdint.h */
 typedef int			STATUS;
 typedef char			INT8;
 typedef unsigned char		UINT8;
 typedef short			INT16;
 typedef unsigned short		UINT16;
-#if defined(__alpha)||defined(__linux)||defined(__MACH__)
+#if defined(__alpha)||defined(__linux)||defined(__MACH__) || defined(__arm64)
 typedef int			INT32;
 typedef unsigned int		UINT32;
 #else
 typedef long			INT32;
 typedef unsigned long		UINT32;
-#endif /* __alpha || __linux || __MACH__*/
+#endif /* __alpha || __linux || __MACH__ || __arm64 */
 typedef float			REAL32;
 typedef double			REAL64;
-#if (defined(__alpha)&&defined(vms)) || defined(__BORLANDC__) || defined(__TURBOC__)
+#endif /* _STDINT_H */
+#if (defined(__alpha)&&defined(vms)) || defined( __CINT__ ) || defined(_WIN32)
 typedef char* 			caddr_t;
 #endif
-#endif /* _STDINT_HNOSTDINT */
 typedef UINT32                  TIME;
 #ifndef BOOL_DEFINED
 #define BOOL_DEFINED
@@ -427,7 +426,7 @@ typedef struct {
 #define MUD_instanceID( pM )	(((MUD_SEC*)pM)->core.instanceID)
 
 
-#if defined(__MSDOS__) || defined(__i386__) || defined(__i586__) || defined(__i686__) || defined(vax) || defined(__alpha) || defined(__amd64) || (defined(__mips)&&!defined(__sgi))
+#if defined(__MSDOS__) || defined(__i386__) || defined(__i586__) || defined(__i686__) || defined(vax) || defined(__alpha) || defined(__amd64) || defined(__arm64) || (defined(__mips)&&!defined(__sgi))
 #define MUD_LITTLE_ENDIAN 1
 #else
 #define MUD_BIG_ENDIAN 1

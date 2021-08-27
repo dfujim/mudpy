@@ -21,10 +21,6 @@ __version__ = variables['__version__']
 # get needed compile arguments
 compile_flags = ['-O3']
 
-# flags needed for windows
-if sys.platform == "win32":
-    compile_flags.extend(["-D__CINT__", "-D__MSDOS__"])
-
 # get header
 with open("README.md", "r", encoding="utf8") as fh:
     long_description = fh.read()

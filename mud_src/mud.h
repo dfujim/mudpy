@@ -183,10 +183,10 @@ typedef UINT32                  BOOL;
 /*
  *  c_utils.h,  Defines for C utilities
  */
-#if defined(vms) || defined(__MSDOS__)
+#if defined(vms) || defined(_WIN32)
 #define bcopy( b1, b2, len )		memcpy(b2,b1,len)
 #define bzero( b, len )			memset(b,(char)0,len)
-#endif /* vms || __MSDOS__ */
+#endif /* vms || _WIN32 */
 #ifndef _C_UTILS_H_   /* conflict with c_utils.h */
 #define _max( a, b )			( ( (a) > (b) ) ? (a) : (b) )
 #define _min( a, b )			( ( (a) < (b) ) ? (a) : (b) )
@@ -199,7 +199,7 @@ typedef UINT32                  BOOL;
 #define _roundUp( n, r )		( (r) * (int)( ((n)+(r)-1) / (r) ) )
 
 #define zalloc( n )			memset((void*)malloc(n),0,n)
-#if defined(vms) || (defined(mips)&&!defined(__sgi)) || (defined(__MSDOS__)&&defined(__STDC__))
+#if defined(vms) || (defined(mips)&&!defined(__sgi)) || (defined(_WIN32)&&defined(__STDC__))
 #define strdup( s )			strcpy((char*)malloc(strlen(s)+1),s)
 #endif /* vms || mips&&!sgi */
 /*#endif */
@@ -426,7 +426,7 @@ typedef struct {
 #define MUD_instanceID( pM )	(((MUD_SEC*)pM)->core.instanceID)
 
 
-#if defined(__MSDOS__) || defined(__i386__) || defined(__i586__) || defined(__i686__) || defined(vax) || defined(__alpha) || defined(__amd64) || defined(__arm64) || (defined(__mips)&&!defined(__sgi))
+#if defined(_WIN32) || defined(__i386__) || defined(__i586__) || defined(__i686__) || defined(vax) || defined(__alpha) || defined(__amd64) || defined(__arm64) || (defined(__mips)&&!defined(__sgi))
 #define MUD_LITTLE_ENDIAN 1
 #else
 #define MUD_BIG_ENDIAN 1

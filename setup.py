@@ -2,7 +2,7 @@ import setuptools
 
 # install numpy and cython dependencies needed for the rest of the setup script
 from setuptools import dist
-dist.Distribution().fetch_build_eggs(['cython>=0.28', 'numpy>=1.19', 'wheel>=0.34'])
+dist.Distribution().fetch_build_eggs(['cython>=0.28', 'numpy>=1.19'])
 
 # normal inports
 from distutils.core import Extension
@@ -59,7 +59,7 @@ setuptools.setup(
         "Operating System :: Microsoft :: Windows",
         "Development Status :: 5 - Production/Stable",
     ],
-    install_requires = ['cython>=0.28', 'numpy>=1.19'],
+    install_requires = ['cython>=0.28', 'numpy>=1.19', 'wheel>=0.34'],
     ext_modules = cythonize([ext], 
                             include_path = [numpy.get_include()], 
                             compiler_directives={"language_level" : "3"})

@@ -88,6 +88,9 @@ class mhist(mcontainer):
     def __itruediv__(self, other):  self.data /= self._get_oval(other); return self
     def __ixor__(self, other):      self.data.__ixor__(self._get_oval(other)); return self
 
+    # dict-like
+    def keys(self):                 return self.__slots__
+
     # copied from np.ndarray
     def all(self, *args, **kwargs):             return self.data.all(*args, **kwargs)
     def any(self, *args, **kwargs):             return self.data.any(*args, **kwargs)

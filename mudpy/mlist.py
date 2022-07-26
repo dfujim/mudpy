@@ -11,15 +11,15 @@ class mlist(list):
         """
             Get attribute of underlying data as a list.
         """
-
+        
         # fetch from top level
         try:
             return getattr(object, name)
 
         # fetch from lower levels
         except AttributeError:
-            out = mlist([getattr(d, name) for d in self if hasattr(d, name)])
-
+            out = mlist([getattr(d, name) for d in self])
+            
             # if base level, return as array
             if type(out[0]) in (float, int):
                 return np.array(out)

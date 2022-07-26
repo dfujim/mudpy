@@ -18,7 +18,7 @@ class mlist(list):
 
         # fetch from lower levels
         except AttributeError:
-            out = mlist([getattr(d, name) for d in self])
+            out = mlist([getattr(d, name) for d in self if hasattr(d, name)])
 
             # if base level, return as array
             if type(out[0]) in (float, int):
@@ -37,7 +37,7 @@ class mlist(list):
 
         # fetch from lower levels
         except TypeError:
-            out = mlist([d[name] for d in self])
+            out = mlist([d[name] for d in self if name in d.keys()])
 
             # if base level, return as array
             if type(out[0]) in (float, int):

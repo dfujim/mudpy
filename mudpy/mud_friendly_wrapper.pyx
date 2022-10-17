@@ -1213,23 +1213,57 @@ cpdef get_ivar_has_time(int file_handle, int id_number):
     return value
   
 cpdef get_ivar_data(int file_handle, int id_number):
-    """Returns array of saved data""" 
-    ndata = get_ivar_n_data(file_handle, id_number)
-    cdef array.array a = array.array('i', [0]*ndata)
-    if not MUD_getIndVarData(file_handle, id_number, &a.data.as_ints[0]):
-        raise RuntimeError('MUD_getIndVarData failed.')
-    cdef int[:] ca = a
-    return np.array(ca, dtype=int)
+    """Returns array of saved data"""
+
+    data_type = get_ivar_data_type(file_handle, id_number)
+    elem_size = get_ivar_element_size(file_handle, id_number)
+    n_data = get_ivar_n_data(file_handle, id_number)
+
+    cdef np.uint8_t[::1] buff_int_8
+    cdef np.uint16_t[::1] buff_int_16
+    cdef np.uint32_t[::1] buff_int_32
+    cdef np.float32_t[::1] buff_float_32
+    cdef np.float64_t[::1] buff_float_64
+
+    if data_type == 1:
+        if elem_size == 1:
+            buff_int_8 = np.ascontiguousarray(np.zeros(n_data, dtype=np.uint8), dtype=np.uint8)
+            if not MUD_getIndVarData(file_handle, id_number, &buff_int_8[0]):
+                raise RuntimeError('MUD_getIndVarData failed.')
+            return np.array(buff_int_8, dtype=np.uint8)
+        if elem_size == 2:
+            buff_int_16 = np.ascontiguousarray(np.zeros(n_data, dtype=np.uint16), dtype=np.uint16)
+            if not MUD_getIndVarData(file_handle, id_number, &buff_int_16[0]):
+                raise RuntimeError('MUD_getIndVarData failed.')
+            return np.array(buff_int_16, dtype=np.uint16)
+        if elem_size == 4:
+            buff_int_32 = np.ascontiguousarray(np.zeros(n_data, dtype=np.uint32), dtype=np.uint32)
+            if not MUD_getIndVarData(file_handle, id_number, &buff_int_32[0]):
+                raise RuntimeError('MUD_getIndVarData failed.')
+            return np.array(buff_int_32, dtype=np.uint32)
+
+    if data_type == 2:
+        if elem_size == 4:
+            buff_float_32 = np.ascontiguousarray(np.zeros(n_data, dtype=np.float32), dtype=np.float32)
+            if not MUD_getIndVarData(file_handle, id_number, &buff_float_32[0]):
+                raise RuntimeError('MUD_getIndVarData failed.')
+            return np.array(buff_float_32, dtype=np.float32)
+        if elem_size == 8:
+            buff_float_64 = np.ascontiguousarray(np.zeros(n_data, dtype=np.float64), dtype=np.float64)
+            if not MUD_getIndVarData(file_handle, id_number, &buff_float_64[0]):
+                raise RuntimeError('MUD_getIndVarData failed.')
+            return np.array(buff_float_64, dtype=np.float64)
+    return
 
 cpdef get_ivar_time_data(int file_handle, int id_number):
-    """Returns array of saved time data""" 
+    """Returns array of saved time data"""
     ndata = get_ivar_n_data(file_handle, id_number)
     cdef array.array a = array.array('i', [0]*ndata)
     if not MUD_getIndVarTimeData(file_handle, id_number, &a.data.as_ints[0]):
         raise RuntimeError('MUD_getIndVarTimeData failed.')
     cdef int[:] ca = a
     return np.array(ca, dtype=int)
-    
+
 ### ======================================================================= ###
 # WRITE INDEPENDENT VARIABLES
 ### ======================================================================= ###
@@ -1243,27 +1277,27 @@ cdef extern from "mud_friendly.c":
     int MUD_setIndVarName( int fh, int id_number, char* name )
     int MUD_setIndVarDescription( int fh, int id_number, char* description)
     int MUD_setIndVarUnits( int fh, int id_number, char* units )
-    
+
     int MUD_setIndVarNumData( int fh, int num, unsigned int value )
     int MUD_setIndVarElemSize( int fh, int num, unsigned int value )
     int MUD_setIndVarDataType( int fh, int num, unsigned int pType )
     int MUD_setIndVarData( int fh, int num, void* pData )
     int MUD_setIndVarTimeData( int fh, int num, void* pTimeData )
-    
+
 cpdef set_ivars(int file_handle, unsigned int pType, unsigned int n_vars):
     """
-        Initializes a independent variable group of type type with n_vars 
+        Initializes a independent variable group of type type with n_vars
         independent variables. Valid types are:
-   
+
             MUD_GRP_GEN_IND_VAR_ID     (TD-MuSR -- statistics data only),
-            MUD_GRP_GEN_IND_VAR_ARR_ID (I-MuSR -- statistics data, history data, 
+            MUD_GRP_GEN_IND_VAR_ARR_ID (I-MuSR -- statistics data, history data,
                                                     and possibly time data).
     """
 
     if not MUD_setIndVars(file_handle, pType, n_vars):
         raise RuntimeError('MUD_setIndVars failed.')
     return
-    
+
 cpdef set_ivar_low(int file_handle, int id_number, double value):
     if not MUD_setIndVarLow(file_handle, id_number, value):
         raise RuntimeError('MUD_setIndVarLow failed.')
@@ -1278,16 +1312,16 @@ cpdef set_ivar_mean(int file_handle, int id_number, double value):
     if not MUD_setIndVarMean(file_handle, id_number, value):
         raise RuntimeError('MUD_setIndVarMean failed.')
     return
-    
+
 cpdef set_ivar_std(int file_handle, int id_number, double value):
     if not MUD_setIndVarStddev(file_handle, id_number, value):
         raise RuntimeError('MUD_setIndVarStddev failed.')
     return
-    
+
 cpdef set_ivar_skewness(int file_handle, int id_number, double value):
     if not MUD_setIndVarSkewness(file_handle, id_number, value):
         raise RuntimeError('MUD_setIndVarSkewness failed.')
-    return 
+    return
 
 cpdef set_ivar_name(int file_handle, int id_number, str title):
     if not MUD_setIndVarName(file_handle, id_number, title.encode(character_encoding)):
@@ -1298,59 +1332,78 @@ cpdef set_ivar_description(int file_handle, int id_number, str title):
     if not MUD_setIndVarDescription(file_handle, id_number, title.encode(character_encoding)):
         raise RuntimeError('MUD_setIndVarDescription failed.')
     return
-    
+
 cpdef set_ivar_units(int file_handle, int id_number, str title):
     if not MUD_setIndVarUnits(file_handle, id_number, title.encode(character_encoding)):
         raise RuntimeError('MUD_setIndVarUnits failed.')
     return
-    
+
 cpdef set_ivar_n_data(int file_handle, int id_number, unsigned int value):
-    """Set number of history data points """ 
+    """Set number of history data points """
     if not MUD_setIndVarNumData(file_handle, id_number, value):
         raise RuntimeError('MUD_setIndVarNumData failed.')
     return
-    
+
 cpdef set_ivar_element_size(int file_handle, int id_number, unsigned int value):
-    """Set size of elements in array in bytes per element""" 
+    """Set size of elements in array in bytes per element"""
     if not MUD_setIndVarElemSize(file_handle, id_number, value):
         raise RuntimeError('MUD_setIndVarElemSize failed.')
     return
-    
+
 cpdef set_ivar_data_type(int file_handle, int id_number, unsigned int value):
     """
         Set data type of elements in array
-        value = 
-            1 for integer (3 bytes/element), 
-            2 for real (4 bytes/element), and 
+        value =
+            1 for integer (3 bytes/element),
+            2 for real (4 bytes/element), and
             3 for string
-    """ 
+    """
     if not MUD_setIndVarDataType(file_handle, id_number, value):
         raise RuntimeError('MUD_setIndVarDataType failed.')
     return
-    
+
 cpdef set_ivar_data(int file_handle, int id_number, data_array):
-    """Set array of saved data""" 
-    
+    """Set array of saved data"""
+
     # get which data type was set
     data_type = get_ivar_data_type(file_handle, id_number)
-    
-    cdef np.uint32_t[::1] buff_int
-    cdef np.float64_t[::1] buff_float
-    
+    elem_size = get_ivar_element_size(file_handle, id_number)
+
+    cdef np.uint8_t[::1] buff_int_8
+    cdef np.uint16_t[::1] buff_int_16
+    cdef np.uint32_t[::1] buff_int_32
+    cdef np.float32_t[::1] buff_float_32
+    cdef np.float64_t[::1] buff_float_64
+
     # set dtype and contiguous
     if data_type == 1:
-        buff_int = np.ascontiguousarray(data_array, dtype=np.uint32)
-        
-        if not MUD_setIndVarData(file_handle, id_number, &buff_int[0]):
-            raise RuntimeError('MUD_setIndVarData failed.')
-        return 
-        
+        if elem_size == 1:
+            buff_int_8 = np.ascontiguousarray(data_array, dtype=np.uint8)
+            if not MUD_setIndVarData(file_handle, id_number, &buff_int_8[0]):
+                raise RuntimeError('MUD_setIndVarData failed.')
+            return
+        if elem_size == 2:
+            buff_int_16 = np.ascontiguousarray(data_array, dtype=np.uint16)
+            if not MUD_setIndVarData(file_handle, id_number, &buff_int_16[0]):
+                raise RuntimeError('MUD_setIndVarData failed.')
+            return
+        if elem_size == 4:
+            buff_int_32 = np.ascontiguousarray(data_array, dtype=np.uint32)
+            if not MUD_setIndVarData(file_handle, id_number, &buff_int_32[0]):
+                raise RuntimeError('MUD_setIndVarData failed.')
+            return
+
     elif data_type == 2:
-        buff_float = np.ascontiguousarray(data_array, dtype=np.float64)
-        
-        if not MUD_setIndVarData(file_handle, id_number, &buff_float[0]):
-            raise RuntimeError('MUD_setIndVarData failed.')
-        return 
+        if elem_size == 4:
+            buff_float_32 = np.ascontiguousarray(data_array, dtype=np.float32)
+            if not MUD_setIndVarData(file_handle, id_number, &buff_float_32[0]):
+                raise RuntimeError('MUD_setIndVarData failed.')
+            return
+        if elem_size == 8:
+            buff_float_64 = np.ascontiguousarray(data_array, dtype=np.float64)
+            if not MUD_setIndVarData(file_handle, id_number, &buff_float_64[0]):
+                raise RuntimeError('MUD_setIndVarData failed.')
+            return
 
     elif data_type == 3:
             raise RuntimeError('Setting strings not defined in set_ivar_data.')

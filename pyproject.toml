@@ -29,16 +29,6 @@ dependencies = [
 ]
 dynamic = ["version"]
 
-# ext_modules = cythonize([ext],
-#                         include_path = [numpy.get_include()],
-#                         compiler_directives={"language_level" : "3"})
-
-
-
-
-
-# packages=setuptools.find_packages(),
-
 [project.urls]
 "Homepage" = "https://github.com/dfujim/mudpy"
 "Bug Tracker" = "https://github.com/dfujim/mudpy/issues"

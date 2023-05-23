@@ -1,32 +1,20 @@
 import setuptools
-
-# install numpy and cython dependencies needed for the rest of the setup script
-from setuptools import dist
-dist.Distribution().fetch_build_eggs(['cython>=0.28', 'numpy>=1.19'])
-
-# normal inports
-from distutils.core import Extension
 from Cython.Build import cythonize
-import numpy, sys
+import numpy
 from os.path import join
 
 # get setup variables
 variables = {}
 with open(join('mudpy', 'global_variables.py')) as fid:
     exec(fid.read(), variables)
-    
+
 __src__ = variables['__src__']
-__version__ = variables['__version__']
 
 # get needed compile arguments
 compile_flags = ['-O3']
 
-# get header
-with open("README.md", "r", encoding="utf8") as fh:
-    long_description = fh.read()
-    
 # module extension
-ext = Extension("mudpy.mud_friendly",
+ext = setuptools.Extension("mudpy.mud_friendly",
                 sources=[join("mudpy", "mud_friendly_wrapper.pyx"),
                          join(__src__, "mud.c"),
                          join(__src__, "mud_gen.c"),
@@ -40,27 +28,7 @@ ext = Extension("mudpy.mud_friendly",
 
 setuptools.setup(
     name = "mud-py",
-    version = __version__,
-    author = "Derek Fujimoto",
-    author_email = "fujimoto@phas.ubc.ca",
-    description = "MUon Data file reader",
-    long_description = long_description,
-    long_description_content_type = "text/markdown",
-    url = "https://github.com/dfujim/mudpy",
-    packages=setuptools.find_packages(),
-    classifiers = [
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Cython",
-        "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
-        "Operating System :: POSIX :: Linux",
-        "Operating System :: MacOS",
-        "Operating System :: Microsoft :: Windows",
-        "Development Status :: 5 - Production/Stable",
-    ],
-    install_requires = ['cython>=0.28', 'numpy>=1.19', 'wheel>=0.34'],
-    ext_modules = cythonize([ext], 
-                            include_path = [numpy.get_include()], 
+    ext_modules = cythonize([ext],
+                            include_path = [numpy.get_include()],
                             compiler_directives={"language_level" : "3"})
     )

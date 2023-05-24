@@ -3,9 +3,11 @@ requires = [
     "setuptools==59.2.0",
     "wheel>=0.34",
     "Cython>=0.28",
-    "hatchling",
+    "numpy>=1.19",
+    # "hatchling",
 ]
-build-backend = "hatchling.build"
+build-backend = "setuptools.build_meta"
+# build-backend = "hatchling.build"
 
 [project]
 name = "mud-py"
@@ -33,6 +35,11 @@ dynamic = ["version"]
 "Homepage" = "https://github.com/dfujim/mudpy"
 "Bug Tracker" = "https://github.com/dfujim/mudpy/issues"
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["mudpy*"]
+
 # set version
-[tool.hatch.version]
-path = 'mudpy/global_variables.py'
+[tool.setuptools.dynamic]
+version = {attr = 'mudpy.__version__'}
+# version = {file = 'mudpy/global_variables.py'}

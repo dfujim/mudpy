@@ -42,4 +42,3 @@ include = ["mudpy*"]
 # set version
 [tool.setuptools.dynamic]
 version = {attr = 'mudpy.__version__'}
-# version = {file = 'mudpy/global_variables.py'}

@@ -2,7 +2,7 @@
 # Derek Fujimoto
 # Nov 2019
 
-import mudpy.mud_friendly as mud
+import mudpy.mud_friendly_wrapper as mud
 from mudpy.containers import mcomment, mhist, mdict, mscaler, mvar
 import time
 

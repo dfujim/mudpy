@@ -1,16 +1,32 @@
 [build-system]
+build-backend = "mesonpy"
 requires = [
-    "setuptools==59.2.0",
-    "wheel>=0.34",
-    "Cython>=0.28",
+    "meson-python>=0.15.0",
+    "Cython>=0.3",
     "numpy>=1.19",
 ]
-build-backend = "setuptools.build_meta"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["mudpy*"]
+[project]
+name = "mud-py"
+authors  = [{name="Derek Fujimoto", email="dfujimoto@triumf.ca" }]
+version = '1.2.14'
+description = "MUon Data file reader"
+readme = "README.md"
+classifiers = [
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
+        "Operating System :: POSIX :: Linux",
+        "Operating System :: MacOS",
+        "Operating System :: Microsoft :: Windows",
+        "Development Status :: 5 - Production/Stable",
+]
+license = {file = "LICENSE"}
+requires-python = ">=3.9"
 
-# set version
-[tool.setuptools.dynamic]
-version = {attr = 'mudpy.__version__'}
+[project.urls]
+"Homepage" = "https://github.com/dfujim/mudpy"
+"Bug Tracker" = "https://github.com/dfujim/mudpy/issues"

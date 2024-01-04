@@ -9,7 +9,7 @@ requires = [
 [project]
 name = "mud-py"
 authors  = [{name="Derek Fujimoto", email="dfujimoto@triumf.ca" }]
-version = '1.2.14'
+version = '1.3.0'
 description = "MUon Data file reader"
 readme = "README.md"
 classifiers = [

@@ -12,17 +12,17 @@
 MUon (MUD) Data file IO package.
 
 [mudpy] is a lightwieght [Python] package aimed to aid in the analysis of muon spin rotation ([μSR]) and β-detected
-nuclear magnetic/quadrupole resonance (β-NMR and β-NQR) data taken at [TRIUMF]. These techniques are similar to 
-"conventional" nuclear magnetic resonance ([NMR]), but use radioactive nuclei or a [muon] as the [NMR] probe in place 
+nuclear magnetic/quadrupole resonance (β-NMR and β-NQR) data taken at [TRIUMF]. These techniques are similar to
+"conventional" nuclear magnetic resonance ([NMR]), but use radioactive nuclei or a [muon] as the [NMR] probe in place
 of a stable isotope.
 
 The intended user of [mudpy] is anyone analyzing data in [TRIUMF]'s [MUD] file format.
 A key goal of the project is to alleviate much of the technical tedium that is often encountered during any analysis.
 
-[mudpy] has been written to fullfill the following needs: 
+[mudpy] has been written to fullfill the following needs:
 
 * Provide a pythonic means of interfacing with [MUD] files in [Python].
-* Provide low-level wrappers of the [`mud_friendly`] API. 
+* Provide low-level wrappers of the [`mud_friendly`] API.
 
 ## Citing
 
@@ -54,8 +54,8 @@ From the [PyPI] as user (recommended) | `pip install --user mud-py` |
 From the [PyPI] as root | `pip install mud-py` |
 From source | `python3 setup.py install` |
 
-Note the hyphen in `mud-py`. The `pip` command should point to a (version 3) 
-[Python] executable (e.g., `python3`, `python3.8`, etc.).
+Note the hyphen in `mud-py`. The `pip` command should point to a (version 3)
+[Python] executable (e.g., `python3`, `python3.9`, etc. - python version must be >=3.9).
 If the above does not work, try using `pip3` or `python3 -m pip` instead.
 
 ## [Contents](https://github.com/dfujim/mudpy/wiki)
